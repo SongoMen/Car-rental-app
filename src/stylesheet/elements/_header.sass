@@ -1,0 +1,36 @@
+.Header
+  width: 100%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  height: 10%
+  padding: 0 150px
+  @media screen and (max-width: 1060px) 
+    padding: 0 50px
+    @media screen and (max-width: 800px) 
+      padding: 0 10px
+  ul
+    list-style-type: none
+    display: flex;
+    align-items: center
+    font-weight: 600
+    padding-left: 10px
+    .selected
+      color: $mainColor
+    li
+      display: inline-block
+      margin: 0 10px
+      transition: all .3s
+      @media screen and (max-width: 880px) 
+        margin: 0 5px
+      &:hover
+        color: $mainColor
+  &__user
+    cursor: pointer
+    border: 3px solid $mainColor
+    padding: 10px
+    margin-left: 20px
+    transition: all .3s
+    &:hover
+      background-color: $mainColor
+      color: white
