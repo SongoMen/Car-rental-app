@@ -17,12 +17,12 @@ const HowTo = () => {
         <div className="HowTo__option">
           <Date />
           <h3>Krok 2.</h3>
-          <h4>Wybierz datę wypożyczenia samochodu.</h4>
+          <h4>Ustal szczegóły.</h4>
         </div>
         <div className="HowTo__option">
           <Pay />
           <h3>Krok 3.</h3>
-          <h4>Wykonaj płatność.</h4>
+          <h4>Dokonaj płatność.</h4>
         </div>
       </div>
     </div>

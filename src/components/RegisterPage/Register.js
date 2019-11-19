@@ -58,7 +58,9 @@ export default class Register extends React.Component {
       this.state.name,
       this.state.email,
       this.state.password
-    );
+    ).then(res => {
+      this.setState({ msg: res.data.message });
+    });
   }
 
   render() {
@@ -112,6 +114,7 @@ export default class Register extends React.Component {
               <Play />
               Zarejestruj się
             </button>
+            <p>{this.state.msg}</p>
           </div>
         </div>
       </div>

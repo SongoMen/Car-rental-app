@@ -34,7 +34,11 @@ export default class Login extends React.Component {
   };
 
   handleLogin() {
-    login(this.state.email, this.state.password);
+    login(this.state.email, this.state.password).catch(() => {
+      this.setState({
+        msg: "Wrong email or password"
+      });
+    });
   }
 
   render() {
@@ -61,13 +65,11 @@ export default class Login extends React.Component {
                 handleRef={this.handleRefPassword}
               />
             </div>
-            <button
-              className="btn"
-              onClick={() => login(this.state.email, this.state.password)}
-            >
+            <button className="btn" onClick={() => this.handleLogin()}>
               <Key />
               Zaloguj się
             </button>
+            <p>{this.state.msg}</p>
           </div>
         </div>
       </div>

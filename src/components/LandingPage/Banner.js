@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { numberOfCars } from "../../auth";
 
 import { ReactComponent as Search } from "../../icons/search.svg";
 
-const Banner = () => {
-  function searchStocks(e) {
+export default class Banner extends React.Component {
+  _isMounted;
+
+  constructor() {
+    super();
+    this.state = {
+      numberOfCars: 0
+    };
+  }
+
+  searchStocks(e) {
     document.getElementById("results").innerHTML = "";
     let b = 0;
     let filter = document.getElementById("searchBar").value.toUpperCase();
@@ -39,34 +49,43 @@ const Banner = () => {
       }
     }
   }
-  return (
-    <div className="banner">
-      <div className="banner__title">
-        <h1>Wypożyczalnia samochodów za najniższą cenę. Zacznij od dziś !</h1>
-        <p>
-          <span className="color"> iles</span> samochodów w{" "}
-          <span className="color"> iles</span> lokalizacjach
-        </p>
-      </div>
-      <div className="banner__search">
-        <div className="banner__input">
-          <label htmlFor="city">Gdzie chcesz odebrać samochód ?</label>
-          <div className="banner__bottom">
-            <input
-              autoComplete="off"
-              placeholder="Wpisz miasto"
-              type="text"
-              className="input"
-              name="city"
-            />
-            <button className="btn">
-              <Search /> Szukaj
-            </button>
+
+  componentDidMount() {
+    numberOfCars().then(res => {
+      this.setState({
+        numberOfCars: res.data
+      });
+    });
+  }
+
+  render() {
+    return (
+      <div className="banner">
+        <div className="banner__title">
+          <h1>Wypożyczalnia samochodów za najniższą cenę. Zacznij od dziś !</h1>
+          <p>
+            <span className="color"> {this.state.numberOfCars}</span> samochodów
+            w <span className="color"> iles</span> lokalizacjach
+          </p>
+        </div>
+        <div className="banner__search">
+          <div className="banner__input">
+            <label htmlFor="city">Gdzie chcesz odebrać samochód ?</label>
+            <div className="banner__bottom">
+              <input
+                autoComplete="off"
+                placeholder="Wpisz miasto"
+                type="text"
+                className="input"
+                name="city"
+              />
+              <button className="btn">
+                <Search /> Szukaj
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default Banner;
+    );
+  }
+}

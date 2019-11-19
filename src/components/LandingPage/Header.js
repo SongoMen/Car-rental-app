@@ -28,7 +28,7 @@ const Header = () => {
         <p> logo </p>
       </Link>
       <ul>
-        <NavLink to="/" activeClassName="selected">
+        <NavLink exact to="/" activeClassName="selected">
           <li>Strona główna</li>
         </NavLink>
         <NavLink to="/onas" activeClassName="selected">
@@ -54,7 +54,9 @@ const Header = () => {
             </li>
           </ul>
         ) : (
-          <h4 className="Header__user">{user}</h4>
+          <Link to="/dashboard">
+            <h4 className="Header__user">{user}</h4>
+          </Link>
         )}
       </ul>
     </div>
