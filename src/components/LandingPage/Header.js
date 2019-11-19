@@ -54,7 +54,7 @@ const Header = () => {
             </li>
           </ul>
         ) : (
-          <h2 className="Header__user">{user}</h2>
+          <h4 className="Header__user">{user}</h4>
         )}
       </ul>
     </div>

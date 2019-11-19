@@ -3,7 +3,7 @@ import Input from "../elements/Input";
 import Header from "../LandingPage/Header";
 import { logout, checkIfLoggedIn } from "../../auth";
 
-export default class Login extends React.Component {
+export default class Dashboard extends React.Component {
   _isMounted = false;
 
   constructor(props) {

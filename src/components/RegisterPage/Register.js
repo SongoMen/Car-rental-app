@@ -1,6 +1,10 @@
 import React from "react";
+
 import Input from "../elements/Input";
 import Header from "../LandingPage/Header";
+import { login } from "../../auth";
+
+import { ReactComponent as Rocket } from "../../icons/rocket.svg";
 
 export default class Register extends React.Component {
   _isMounted = false;
@@ -11,7 +15,8 @@ export default class Register extends React.Component {
       msg: "",
       loading: false,
       password: "",
-      email: ""
+      email: "",
+      logged: false
     };
   }
 
@@ -27,18 +32,33 @@ export default class Register extends React.Component {
     });
   };
 
+  handleLogin() {
+    login(this.state.email, this.state.password);
+  }
+
   render() {
     return (
       <div className="Login">
         <Header />
-        <form>
-          <Input type="text" name="email" handleRef={this.handleRefEmail} />
-          <Input
-            type="password"
-            name="pass"
-            handleRef={this.handleRefPassword}
-          />
-        </form>
+        <div className="form">
+          <div className="form__left">
+            <h2>Załóż konto</h2>
+            <Rocket />
+          </div>
+          <div className="form__right">
+            <Input type="text" name="email" handleRef={this.handleRefEmail} />
+            <Input
+              type="password"
+              name="pass"
+              handleRef={this.handleRefPassword}
+            />
+            <button
+              onClick={() => login(this.state.email, this.state.password)}
+            >
+              Button
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

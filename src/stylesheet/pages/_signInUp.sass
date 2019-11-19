@@ -1,0 +1,40 @@
+.Login, .Register
+  height: 100%
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  .form
+    margin: auto
+    width: 50%
+    background-color: white
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.4);
+    display: flex
+    height: 65%
+    border-radius: 5px
+    &__left
+      width: 50%
+      display: flex
+      justify-content: center
+      align-items: center
+      background-color: $mainColor
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      flex-direction: column
+      color: white
+      h2
+        margin-bottom: 50px
+      svg
+        width: 50%
+        fill: $bgColor
+    &__right
+      width: 50%
+      display: flex
+      justify-content: center
+      align-items: center
+      background-color: white
+      display: flex
+      flex-direction: column
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;

@@ -12,6 +12,8 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Login from "./components/LoginPage/Login";
 import Register from "./components/RegisterPage/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
+import About from "./components/subpages/about";
+import Cars from "./components/Cars/Cars";
 
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
@@ -89,6 +91,9 @@ class App extends React.Component {
               path="/register"
               component={Register}
             />
+            <Route path="/onas" component={About} />
+            <Route path="/samochody" component={Cars} />
+
             <PrivateRoute
               authed={this.state.authed}
               path="/dashboard"

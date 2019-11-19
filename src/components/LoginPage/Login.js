@@ -1,9 +1,10 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 
 import Input from "../elements/Input";
 import Header from "../LandingPage/Header";
-import { login, checkIfLoggedIn } from "../../auth";
+import { login } from "../../auth";
+
+import { ReactComponent as Fav } from "../../icons/computer.svg";
 
 export default class Login extends React.Component {
   _isMounted = false;
@@ -38,13 +39,26 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="Login">
-        {this.state.logged && <Redirect to="/dashboard" />}
         <Header />
-        <Input type="text" name="email" handleRef={this.handleRefEmail} />
-        <Input type="password" name="pass" handleRef={this.handleRefPassword} />
-        <button onClick={() => login(this.state.email, this.state.password)}>
-          Button
-        </button>
+        <div className="form">
+          <div className="form__left">
+            <h2>Zaloguj się tutaj.</h2>
+            <Fav />
+          </div>
+          <div className="form__right">
+            <Input type="text" name="email" handleRef={this.handleRefEmail} />
+            <Input
+              type="password"
+              name="pass"
+              handleRef={this.handleRefPassword}
+            />
+            <button
+              onClick={() => login(this.state.email, this.state.password)}
+            >
+              Button
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
