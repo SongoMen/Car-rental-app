@@ -22,7 +22,7 @@ export default class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className="Login">
+      <div className="Dashboard">
         <Header />
         <button onClick={() => this.handleLogout()}>Button</button>
       </div>

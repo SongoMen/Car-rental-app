@@ -5,6 +5,7 @@ import Header from "../LandingPage/Header";
 import { login } from "../../auth";
 
 import { ReactComponent as Fav } from "../../icons/computer.svg";
+import { ReactComponent as Key } from "../../icons/key.svg";
 
 export default class Login extends React.Component {
   _isMounted = false;
@@ -46,16 +47,26 @@ export default class Login extends React.Component {
             <Fav />
           </div>
           <div className="form__right">
-            <Input type="text" name="email" handleRef={this.handleRefEmail} />
-            <Input
-              type="password"
-              name="pass"
-              handleRef={this.handleRefPassword}
-            />
+            <div>
+              <label htmlFor="email">Email</label>
+              <br />
+              <Input type="text" name="email" handleRef={this.handleRefEmail} />
+            </div>
+            <div>
+              <label htmlFor="password">Hasło</label>
+              <br />
+              <Input
+                type="password"
+                name="pass"
+                handleRef={this.handleRefPassword}
+              />
+            </div>
             <button
+              className="btn"
               onClick={() => login(this.state.email, this.state.password)}
             >
-              Button
+              <Key />
+              Zaloguj się
             </button>
           </div>
         </div>

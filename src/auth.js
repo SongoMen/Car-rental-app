@@ -17,6 +17,28 @@ export function checkIfLoggedIn() {
   }
 }
 
+export function register(first_name, last_name, name, email, password) {
+  const params = new URLSearchParams();
+  params.append("first_name", first_name);
+  params.append("last_name", last_name);
+  params.append("username", name);
+  params.append("email", email);
+  params.append("password", password);
+  axios
+    .post(
+      "https://backendba.000webhostapp.com/api/register.php",
+      params,
+      config
+    )
+    .then(function(response) {
+      console.log(response);
+      return response.data.message;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
 export function login(email, password) {
   const params = new URLSearchParams();
   params.append("email", email);
