@@ -4,6 +4,7 @@ import Loader from "../elements/Loader";
 import Header from "./Header";
 import Banner from "./Banner";
 import HowTo from "./HowTo";
+import CookiesNotification from "../elements/Cookies";
 
 export default class LandingPage extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class LandingPage extends React.Component {
         <Header />
         <Banner />
         <HowTo />
+        <CookiesNotification />
       </div>
     );
   }
