@@ -6,8 +6,16 @@ const About = () => {
   return (
     <div className="About">
       <Header />
+      <div className="About__title">
+        <div className="About__cont">
+          <h1 className="hover">O</h1>
+          <h1 className="hover">&nbsp;</h1>
+          <h1 className="hover">N</h1>
+          <h1 className="hover">A</h1>
+          <h1 className="hover">S</h1>
+        </div>
+      </div>
       <div className="About__content">
-        <h1>O nas</h1>
         <p>
           Posiadamy ogromne doświadczenie w motoryzacji. Zajmujemy się importem
           samochodów z zagranicy. Posiadamy szeroki wybór samochodów. Zarówno
