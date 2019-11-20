@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../LandingPage/Header";
-import { logout, checkIfLoggedIn } from "../../auth";
+import { logout } from "../../auth";
 
 export default class Cars extends React.Component {
   _isMounted = false;
@@ -8,11 +8,16 @@ export default class Cars extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      msg: "",
-      loading: false,
-      password: "",
-      email: ""
+      loading: false
     };
+  }
+
+  componentDidMount() {
+    this._isMounted = true;
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   handleLogout() {
@@ -21,8 +26,9 @@ export default class Cars extends React.Component {
 
   render() {
     return (
-      <div className="Login">
-        <img src="https://pics.clipartpng.com/midle/Blue_Bmw_320i_2013_Car_PNG_Clipart-109.png" />
+      <div className="Cars">
+        <Header />
+        <button>dsadsa</button>
       </div>
     );
   }

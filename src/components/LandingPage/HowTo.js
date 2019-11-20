@@ -22,7 +22,7 @@ const HowTo = () => {
         <div className="HowTo__option">
           <Pay />
           <h3>Krok 3.</h3>
-          <h4>Dokonaj płatność.</h4>
+          <h4>Dokonaj płatności.</h4>
         </div>
       </div>
     </div>
