@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { numberOfCars } from "../../auth";
-import $ from "jquery";
 
 import { ReactComponent as Search } from "../../icons/search.svg";
 var Typeahead = require("react-typeahead").Typeahead;
@@ -12,7 +11,8 @@ export default class Banner extends React.Component {
   constructor() {
     super();
     this.state = {
-      numberOfCars: 0
+      numberOfCars: 0,
+      localizations: 0
     };
   }
 
@@ -67,11 +67,12 @@ export default class Banner extends React.Component {
       .then(res => {
         if (typeof String(res).length !== "undefined" && this._isMounted)
           this.setState({
-            numberOfCars: res
+            numberOfCars: res.cars,
+            localizations: res.localization
           });
       })
-      .catch(() => {
-        console.log("x");
+      .catch(err => {
+        console.log(err);
       });
   }
   componentWillUnMount() {
@@ -84,8 +85,9 @@ export default class Banner extends React.Component {
         <div className="banner__title">
           <h1>Wypożyczalnia samochodów za najniższą cenę. Zacznij od dziś !</h1>
           <p>
-            <span className="color"> {this.state.numberOfCars}</span> samochodów
-            w <span className="color"> iles</span> lokalizacjach
+            <span className="color"> {this.state.numberOfCars}</span> samochody
+            w <span className="color"> {this.state.localizations}</span>{" "}
+            lokalizacjach
           </p>
         </div>
         <div className="banner__search">
@@ -93,10 +95,7 @@ export default class Banner extends React.Component {
             <label htmlFor="city">Gdzie chcesz odebrać samochód ?</label>
             <div className="banner__bottom">
               <div>
-                <Typeahead
-                  options={["John", "Paul", "George", "Ringo"]}
-                  maxVisible={2}
-                />
+                <Typeahead options={["Lublin", "Warszawa"]} maxVisible={2} />
 
                 <ul className="banner__results" id="results" />
               </div>

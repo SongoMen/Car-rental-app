@@ -24,7 +24,21 @@ export function numberOfCars() {
   params.append("first_name", "X");
 
   return axios
-    .post("https://backendba.000webhostapp.com/api/cars.php", params, config)
+    .post("https://backendba.000webhostapp.com/api/info.php", params, config)
+    .then(function(response) {
+      return response.data;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
+export function getBrands() {
+  const params = new URLSearchParams();
+  params.append("first_name", "X");
+
+  return axios
+    .post("https://backendba.000webhostapp.com/api/brands.php", params, config)
     .then(function(response) {
       return response.data;
     })

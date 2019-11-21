@@ -1,7 +1,6 @@
 import React from "react";
 
 import Input from "../elements/Input";
-import Header from "../LandingPage/Header";
 import { login } from "../../auth";
 
 import { ReactComponent as Fav } from "../../icons/computer.svg";
@@ -44,7 +43,6 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="Login">
-        <Header />
         <div className="form">
           <div className="form__left">
             <h2>Zaloguj się tutaj.</h2>

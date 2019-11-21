@@ -1,8 +1,9 @@
 import React from "react";
-import Header from "../LandingPage/Header";
 import { logout } from "../../auth";
 import { connect } from "react-redux";
 import { changeLeftBar } from "../../actions/actions";
+import Leftbar from "./Leftbar";
+import HideLeftbar from "./HideLeftbar";
 
 let status = true;
 
@@ -31,9 +32,6 @@ class Cars extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
-      console.log(this.props.leftbar);
-    }, 1000);
     this._isMounted = true;
   }
 
@@ -48,8 +46,10 @@ class Cars extends React.Component {
   render() {
     return (
       <div className="Cars">
-        <Header />
         <button onClick={this.leftBarChange}>dsadsa</button>
+        <HideLeftbar show={this.props.leftbar}>
+          <Leftbar />
+        </HideLeftbar>
       </div>
     );
   }

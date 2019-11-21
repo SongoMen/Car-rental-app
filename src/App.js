@@ -14,6 +14,7 @@ import Register from "./components/RegisterPage/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
 import About from "./components/subpages/about";
 import Cars from "./components/Cars/Cars";
+import Header from "./components/LandingPage/Header";
 
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
@@ -79,6 +80,7 @@ class App extends React.Component {
     ) : (
       <Router>
         <div className="container">
+          <Header />
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <PublicRoute

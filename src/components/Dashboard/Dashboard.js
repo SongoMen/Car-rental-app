@@ -1,6 +1,5 @@
 import React from "react";
 import Input from "../elements/Input";
-import Header from "../LandingPage/Header";
 import { logout, checkIfLoggedIn } from "../../auth";
 
 export default class Dashboard extends React.Component {
@@ -23,7 +22,6 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="Dashboard">
-        <Header />
         <button onClick={() => this.handleLogout()}>Button</button>
       </div>
     );

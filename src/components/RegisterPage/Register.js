@@ -1,7 +1,6 @@
 import React from "react";
 
 import Input from "../elements/Input";
-import Header from "../LandingPage/Header";
 import { register } from "../../auth";
 
 import { ReactComponent as Rocket } from "../../icons/rocket.svg";
@@ -66,7 +65,6 @@ export default class Register extends React.Component {
   render() {
     return (
       <div className="Login">
-        <Header />
         <div className="form">
           <div className="form__left">
             <h2>Załóż konto</h2>

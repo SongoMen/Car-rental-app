@@ -1,11 +1,8 @@
 import React from "react";
 
-import Header from "../LandingPage/Header";
-
 const About = () => {
   return (
     <div className="About">
-      <Header />
       <div className="About__title">
         <div className="About__cont">
           <h1 className="hover">O</h1>
