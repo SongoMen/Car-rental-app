@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { getBrands } from "../../auth";
+import React from "react";
+import { getBrands, getCars } from "../../auth";
 import Loader from "../elements/Loader";
 import parse from "html-react-parser";
-
-import { ReactComponent as Search } from "../../icons/search.svg";
-var Typeahead = require("react-typeahead").Typeahead;
+import { Link } from "react-router-dom";
+import DisplayCars from "./DisplayCars";
 
 let brands = {
   names: [],
-  logo: []
+  logo: [],
+  num: ""
 };
 
-export default class Banner extends React.Component {
+let cars = {
+  models: [],
+  images: [],
+  dates: [],
+  localizations: []
+};
+
+export default class CarBrands extends React.Component {
   _isMounted;
 
   constructor() {
@@ -19,34 +26,67 @@ export default class Banner extends React.Component {
     this.state = {
       numberOfCars: 0,
       localizations: 0,
-      loader: true
+      loader: true,
+      carLoader: true
     };
+    this.handleChangeBrand = this.handleChangeBrand.bind(this);
   }
 
   handleChangeBrand(el) {
-    console.log(el.target.classList.value.replace(" ", "."));
-    var elemsActive = document.querySelectorAll(
-      el.target.classList.value.replace(" ", ".")
-    );
-    console.log(elemsActive);
-
-    var elems = document.querySelectorAll(".Brands__option");
-    [].forEach.call(elems, function(el) {
-      el.classList.remove("active");
-    });
-    [].forEach.call(elemsActive, function(el) {
-      console.log();
-      el.classList.add("active");
-    });
+    if (
+      !el.target.classList.contains("active") &&
+      "." + el.target.classList.value.replace(" ", ".") !== "."
+    ) {
+      this.fetchCars(el.target.getAttribute("name"));
+      var elemsActive = document.querySelectorAll(
+        "." + el.target.classList.value.replace(" ", ".")
+      );
+      var elems = document.querySelectorAll(".Brands__option");
+      [].forEach.call(elems, function(el) {
+        el.classList.remove("active");
+      });
+      [].forEach.call(elemsActive, function(el) {
+        el.classList.add("active");
+      });
+    }
   }
 
-  componentDidMount() {
-    this._isMounted = true;
+  fetchCars(brand) {
+    cars.models = [];
+    cars.dates = [];
+    cars.images = [];
+    cars.localizations = [];
+    if (this._isMounted) {
+      this.setState({
+        carLoader: true
+      });
+    }
+    getCars(brand)
+      .then(res => {
+        for (let i = 0; i < res.model.length; i++) {
+          console.log(res);
+          cars.models.push(res.model[i]);
+          cars.images.push(res.image[i]);
+          cars.localizations.push(res.localization[i]);
+          cars.dates.push(res.date[i]);
+        }
+      })
+      .then(() => {
+        if (this._isMounted) {
+          this.setState({
+            carLoader: false
+          });
+        }
+      });
+  }
+
+  fetchBrands() {
     getBrands()
       .then(res => {
         for (let i = 0; i < res.names.length; i++) {
           brands.names.push(res.names[i]);
           brands.logo.push(res.logo[i]);
+          brands.num = res.number;
         }
       })
       .then(() => {
@@ -60,6 +100,12 @@ export default class Banner extends React.Component {
         console.log(err);
       });
   }
+
+  componentDidMount() {
+    this._isMounted = true;
+    this.fetchBrands();
+    this.fetchCars("BMW");
+  }
   componentWillUnMount() {
     this._isMounted = false;
   }
@@ -67,6 +113,7 @@ export default class Banner extends React.Component {
   render() {
     return (
       <div className="Brands">
+        <h1>Nasze samochody</h1>
         {this.state.laoder && <Loader />}
         <div className="Brands__options">
           {!this.state.loader &&
@@ -74,22 +121,44 @@ export default class Banner extends React.Component {
               return (
                 <div
                   onClick={this.handleChangeBrand}
+                  name={val}
                   className={
-                    "Brands__option " +
+                    "Brands__option number" +
                     String(indx) +
                     " " +
                     (indx === 0 ? "active" : "")
                   }
                   key={indx}
                 >
-                  {console.log(String(indx))}
-
                   {parse(String(brands.logo[indx]))}
                   {val}
                 </div>
               );
             })}
+          {!this.state.loader && (
+            <Link to="/samochody">
+              <div className="Brands__option">
+                <span className="color">{brands.num - 5}+ </span>&nbsp; More
+              </div>
+            </Link>
+          )}
         </div>
+        {!this.state.carLoader ? (
+          <div className="Brands__cars">
+            {cars.models.map((val, indx) => {
+              return (
+                <DisplayCars key={indx} show={!this.state.carLoader}>
+                  <div key={indx} className="Brands__car">
+                    <img src={cars.images[indx]} alt={val} />
+                    <h4>{cars.dates[indx] + " " + val}</h4>
+                  </div>
+                </DisplayCars>
+              );
+            })}
+          </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     );
   }

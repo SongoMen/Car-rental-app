@@ -47,6 +47,20 @@ export function getBrands() {
     });
 }
 
+export function getCars(brand) {
+  const params = new URLSearchParams();
+  params.append("model", brand);
+
+  return axios
+    .post("https://backendba.000webhostapp.com/api/cars.php", params, config)
+    .then(function(response) {
+      return response.data;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
 export function register(first_name, last_name, name, email, password) {
   const params = new URLSearchParams();
   params.append("first_name", first_name);
