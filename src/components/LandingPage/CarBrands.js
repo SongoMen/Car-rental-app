@@ -27,7 +27,8 @@ export default class CarBrands extends React.Component {
       numberOfCars: 0,
       localizations: 0,
       loader: true,
-      carLoader: true
+      carLoader: true,
+      canSelect: true
     };
     this.handleChangeBrand = this.handleChangeBrand.bind(this);
   }
@@ -35,7 +36,8 @@ export default class CarBrands extends React.Component {
   handleChangeBrand(el) {
     if (
       !el.target.classList.contains("active") &&
-      "." + el.target.classList.value.replace(" ", ".") !== "."
+      "." + el.target.classList.value.replace(" ", ".") !== "." &&
+      this.state.canSelect
     ) {
       this.fetchCars(el.target.getAttribute("name"));
       var elemsActive = document.querySelectorAll(
@@ -73,9 +75,12 @@ export default class CarBrands extends React.Component {
       })
       .then(() => {
         if (this._isMounted) {
-          this.setState({
-            carLoader: false
-          });
+          setTimeout(() => {
+            this.setState({
+              carLoader: false,
+              canSelect: true
+            });
+          }, 500);
         }
       });
   }
