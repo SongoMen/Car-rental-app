@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { changeLeftBar } from "../../actions/actions";
 import Leftbar from "./Leftbar";
 import HideLeftbar from "./HideLeftbar";
+import Input from "../elements/Input";
 
 let status = true;
 
@@ -43,10 +44,19 @@ class Cars extends React.Component {
     logout();
   }
 
+  handleRefBrand = ref => {
+    this.setState({
+      password: ref
+    });
+  };
+
   render() {
     return (
       <div className="Cars">
         <button onClick={this.leftBarChange}>dsadsa</button>
+        <div className="Cars__filetrs">
+          <Input type="text" name="name" handleRef={this.handleRefBrand} />
+        </div>
         <HideLeftbar show={this.props.leftbar}>
           <Leftbar />
         </HideLeftbar>

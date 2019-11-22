@@ -3,10 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import { checkIfLoggedIn } from "../../auth";
 import Cookies from "universal-cookie";
 
-const styles = {
-  position: "static"
-};
-
 export default class Header extends React.Component {
   _isMounted = false;
 

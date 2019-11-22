@@ -10,7 +10,11 @@ const config = {
 const cookies = new Cookies();
 
 export function checkIfLoggedIn() {
-  if (cookies.get("name") && cookies.get("token")) {
+  if (
+    cookies.get("name") &&
+    cookies.get("token") &&
+    cookies.get("token").length > 10
+  ) {
     return true;
   } else {
     return false;

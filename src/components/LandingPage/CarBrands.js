@@ -66,7 +66,6 @@ export default class CarBrands extends React.Component {
     getCars(brand)
       .then(res => {
         for (let i = 0; i < res.model.length; i++) {
-          console.log(res);
           cars.models.push(res.model[i]);
           cars.images.push(res.image[i]);
           cars.localizations.push(res.localization[i]);
@@ -155,7 +154,10 @@ export default class CarBrands extends React.Component {
                 <DisplayCars key={indx} show={!this.state.carLoader}>
                   <div key={indx} className="Brands__car">
                     <img src={cars.images[indx]} alt={val} />
-                    <h4>{cars.dates[indx] + " " + val}</h4>
+                    <div className="Brands__bottom">
+                      <h4>{cars.dates[indx] + " " + val}</h4>
+                      <p>Lokalizacja: {cars.localizations[indx]}</p>
+                    </div>
                   </div>
                 </DisplayCars>
               );
