@@ -70,6 +70,20 @@ export function getUserInfo() {
     });
 }
 
+export function getAllCars() {
+  const params = new URLSearchParams();
+  params.append("email", cookies.get("email"));
+
+  return axios
+    .post("https://backendba.000webhostapp.com/api/allcars.php", params, config)
+    .then(function(response) {
+      return response.data;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
 export function getCars(brand) {
   const params = new URLSearchParams();
   params.append("model", brand);
