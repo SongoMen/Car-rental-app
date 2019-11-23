@@ -76,7 +76,7 @@ export default class Header extends React.Component {
                   <h4 className="Header__user">{user}</h4>
                 </Link>
                 <h4 className="Header__logout" onClick={logout}>
-                  Logout
+                  Wyloguj się
                 </h4>
               </div>
             )}

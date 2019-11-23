@@ -77,6 +77,7 @@ export function getAllCars() {
   return axios
     .post("https://backendba.000webhostapp.com/api/allcars.php", params, config)
     .then(function(response) {
+      console.log(response);
       return response.data;
     })
     .catch(function(error) {

@@ -1,22 +1,24 @@
 import React from "react";
 import { logout, getAllCars } from "../../auth";
 import { connect } from "react-redux";
-import { changeLeftBar } from "../../actions/actions";
+import { changeLeftBar, changeContent } from "../../actions/actions";
 import Leftbar from "./Leftbar";
 import HideLeftbar from "./HideLeftbar";
 import Input from "../elements/Input";
 import DisplayCars from "../LandingPage/DisplayCars";
 import Loader from "../elements/Loader";
 
-let status = true;
-
 const mapStateToProps = state => ({
   ...state
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeLeftBar: () => dispatch(changeLeftBar(status))
+  changeLeftBar: () => dispatch(changeLeftBar(status)),
+  changeContent: () => dispatch(changeContent(content))
 });
+
+let status = true;
+let content = {};
 
 let cars = {
   models: [],
@@ -42,8 +44,16 @@ class Cars extends React.Component {
   }
 
   leftBarChange(brand, model, img, date, localization) {
-    console.log(arguments);
     status = this.props.leftbar ? false : true;
+    if (status === true) {
+      content.brand = brand;
+      content.image = img;
+      content.model = model;
+      content.date = date;
+      content.localization = localization;
+
+      this.props.changeContent();
+    }
     this.props.changeLeftBar();
   }
 
@@ -146,6 +156,7 @@ class Cars extends React.Component {
                     key={indx}
                     className="Cars__car"
                   >
+                    <h6 className="Cars__text">RENT NOW</h6>
                     <img
                       style={
                         this.state.loadImage
@@ -177,7 +188,9 @@ class Cars extends React.Component {
         <HideLeftbar show={this.props.leftbar}>
           <Leftbar />
         </HideLeftbar>
-        {this.props.leftbar && <div className="bg" />}
+        {this.props.leftbar && (
+          <div className="bg" onClick={this.leftBarChange} />
+        )}
       </div>
     );
   }

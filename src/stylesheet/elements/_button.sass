@@ -16,4 +16,13 @@
     margin-right: 10px
     min-width: 20px
     fill: white
-
+  &:hover 
+    background-color: $hoverColor
+    box-shadow: $shadow
+    transform: translateY(-3px)
+  &.inactive
+    background-color: #bfbfbf
+    &:hover 
+      background-color: #b0b0b0
+      box-shadow: none
+      transform: translateY(0)
