@@ -15,6 +15,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import About from "./components/subpages/about";
 import Cars from "./components/Cars/Cars";
 import Header from "./components/LandingPage/Header";
+import Footer from "./components/LandingPage/Footer";
 
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
@@ -102,6 +103,7 @@ class App extends React.Component {
               component={Dashboard}
             />
           </Switch>
+          <Footer />
         </div>
       </Router>
     );

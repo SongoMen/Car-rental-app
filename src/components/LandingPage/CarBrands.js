@@ -15,7 +15,8 @@ let cars = {
   models: [],
   images: [],
   dates: [],
-  localizations: []
+  localizations: [],
+  brand: ""
 };
 
 export default class CarBrands extends React.Component {
@@ -28,9 +29,11 @@ export default class CarBrands extends React.Component {
       localizations: 0,
       loader: true,
       carLoader: true,
-      canSelect: true
+      canSelect: true,
+      loadImage: false
     };
     this.handleChangeBrand = this.handleChangeBrand.bind(this);
+    this.handleOnLoad = this.handleOnLoad.bind(this);
   }
 
   handleChangeBrand(el) {
@@ -39,6 +42,10 @@ export default class CarBrands extends React.Component {
       "." + el.target.classList.value.replace(" ", ".") !== "." &&
       this.state.canSelect
     ) {
+      if (this._isMounted)
+        this.setState({
+          loadImage: false
+        });
       this.fetchCars(el.target.getAttribute("name"));
       var elemsActive = document.querySelectorAll(
         "." + el.target.classList.value.replace(" ", ".")
@@ -65,6 +72,7 @@ export default class CarBrands extends React.Component {
     }
     getCars(brand)
       .then(res => {
+        cars.brand = brand;
         for (let i = 0; i < res.model.length; i++) {
           cars.models.push(res.model[i]);
           cars.images.push(res.image[i]);
@@ -103,6 +111,10 @@ export default class CarBrands extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  handleOnLoad() {
+    this.setState({ loadImage: true });
   }
 
   componentDidMount() {
@@ -153,9 +165,18 @@ export default class CarBrands extends React.Component {
               return (
                 <DisplayCars key={indx} show={!this.state.carLoader}>
                   <div key={indx} className="Brands__car">
-                    <img src={cars.images[indx]} alt={val} />
+                    <img
+                      style={
+                        this.state.loadImage
+                          ? { display: "flex" }
+                          : { display: "none" }
+                      }
+                      onLoad={() => this.handleOnLoad()}
+                      src={cars.images[indx]}
+                      alt={val}
+                    />
                     <div className="Brands__bottom">
-                      <h4>{cars.dates[indx] + " " + val}</h4>
+                      <h4>{cars.dates[indx] + " " + cars.brand + " " + val}</h4>
                       <p>Lokalizacja: {cars.localizations[indx]}</p>
                     </div>
                   </div>

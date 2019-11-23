@@ -13,7 +13,8 @@ export function checkIfLoggedIn() {
   if (
     cookies.get("name") &&
     cookies.get("token") &&
-    cookies.get("token").length > 10
+    cookies.get("token").length > 10 &&
+    cookies.get("email").length > 1
   ) {
     return true;
   } else {
@@ -43,6 +44,24 @@ export function getBrands() {
 
   return axios
     .post("https://backendba.000webhostapp.com/api/brands.php", params, config)
+    .then(function(response) {
+      return response.data;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
+export function getUserInfo() {
+  const params = new URLSearchParams();
+  params.append("email", cookies.get("email"));
+
+  return axios
+    .post(
+      "https://backendba.000webhostapp.com/api/userinfo.php",
+      params,
+      config
+    )
     .then(function(response) {
       return response.data;
     })
@@ -93,6 +112,8 @@ export function login(email, password) {
       console.log(response.data);
       cookies.set("name", response.data.name, { path: "/" });
       cookies.set("token", response.data.jwt, { path: "/" });
+      cookies.set("email", response.data.email, { path: "/" });
+
       window.location.reload(false);
     });
 }
@@ -100,5 +121,7 @@ export function login(email, password) {
 export function logout() {
   cookies.remove("name", { path: "/" });
   cookies.remove("token", { path: "/" });
+  cookies.remove("email", { path: "/" });
+
   window.location.reload(false);
 }

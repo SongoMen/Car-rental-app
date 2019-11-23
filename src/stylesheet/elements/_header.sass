@@ -9,6 +9,12 @@
     padding: 0 50px
   @media screen and (max-width: 800px) 
     padding: 0 10px
+  &__logged
+    display: flex
+    align-items: center
+    justify-content: center
+  .Logo
+    color: $textColor
   ul
     list-style-type: none
     display: flex;
@@ -29,10 +35,21 @@
         color: $mainColor
   &__user
     cursor: pointer
-    border: 3px solid $mainColor
-    padding: 10px
+    border: 2px solid $mainColor
+    padding: 5px 10px
     margin-left: 20px
     transition: all .3s
     &:hover
       background-color: $mainColor
       color: white
+  &__logout
+    cursor: pointer
+    border: 2px solid $mainColor
+    padding: 5px 10px
+    margin-left: 20px
+    background-color: $mainColor
+    color: white
+    transition: all .3s
+    &:hover
+      background-color: white
+      color: $textColor

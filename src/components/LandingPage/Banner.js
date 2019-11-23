@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { numberOfCars } from "../../auth";
 
 import { ReactComponent as Search } from "../../icons/search.svg";

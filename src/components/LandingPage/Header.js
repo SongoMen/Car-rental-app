@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { checkIfLoggedIn } from "../../auth";
 import Cookies from "universal-cookie";
+import Logo from "../elements/Logo";
+import { checkIfLoggedIn, logout } from "../../auth";
 
 export default class Header extends React.Component {
   _isMounted = false;
@@ -30,9 +31,7 @@ export default class Header extends React.Component {
           id="header"
           style={{ position: this.state.position }}
         >
-          <Link to="/">
-            <p> logo </p>
-          </Link>
+          <Logo />
           <ul>
             <NavLink exact to="/" activeClassName="selected">
               <li>Strona główna</li>
@@ -60,9 +59,14 @@ export default class Header extends React.Component {
                 </li>
               </ul>
             ) : (
-              <Link to="/dashboard">
-                <h4 className="Header__user">{user}</h4>
-              </Link>
+              <div className="Header__logged">
+                <Link to="/dashboard">
+                  <h4 className="Header__user">{user}</h4>
+                </Link>
+                <h4 className="Header__logout" onClick={logout}>
+                  Logout
+                </h4>
+              </div>
             )}
           </ul>
         </div>
