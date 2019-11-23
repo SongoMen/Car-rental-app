@@ -5,6 +5,7 @@
   align-items: center
   height: 10%
   padding: 0 150px
+  white-space: nowrap
   @media screen and (max-width: 1060px) 
     padding: 0 50px
   @media screen and (max-width: 800px) 
@@ -31,8 +32,11 @@
       transition: all .3s
       @media screen and (max-width: 880px) 
         margin: 0 5px
-      &:hover
-        color: $mainColor
+      
+      a
+        transition: all .3s
+        &:hover
+          color: $mainColor
   &__user
     cursor: pointer
     border: 2px solid $mainColor

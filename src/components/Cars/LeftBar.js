@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { changeLeftBar } from "../../actions/actions";
 import Loader from "../elements/Loader";
 
-let status;
+import { ReactComponent as X } from "../../icons/x.svg";
 
 const mapStateToProps = state => ({
   ...state
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeLeftBar: () => dispatch(changeLeftBar(status))
+  changeLeftBar: () => dispatch(changeLeftBar(false))
 });
 
 class LeftBar extends React.Component {
@@ -24,13 +24,27 @@ class LeftBar extends React.Component {
       password: "",
       email: ""
     };
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleClose() {
+    console.log(this);
+    this.props.changeLeftBar();
   }
 
   render() {
-    console.log(this.props.content.length);
     return (
       <div className="Leftbar">
-        {this.props.content.length === 0 ? <Loader /> : <img />}
+        {this.props.content.length === 0 ? (
+          <Loader />
+        ) : (
+          <div className="Leftbar__content">
+            <X />
+          </div>
+        )}
+        <div className="Leftbar__content">
+          <X onClick={this.handleClose} />
+        </div>
       </div>
     );
   }

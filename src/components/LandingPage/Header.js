@@ -33,18 +33,30 @@ export default class Header extends React.Component {
         >
           <Logo />
           <ul>
-            <NavLink exact to="/" activeClassName="selected">
-              <li>Strona główna</li>
-            </NavLink>
-            <NavLink to="/onas" activeClassName="selected">
-              <li>O nas</li>
-            </NavLink>
-            <NavLink to="/samochody" activeClassName="selected">
-              <li>Samochody</li>
-            </NavLink>
-            <NavLink to="/kontakt" activeClassName="selected">
-              <li>Kontakt</li>
-            </NavLink>
+            <li>
+              {" "}
+              <NavLink exact to="/" activeClassName="selected">
+                Strona główna{" "}
+              </NavLink>
+            </li>
+            <li>
+              {" "}
+              <NavLink to="/onas" activeClassName="selected">
+                O nas{" "}
+              </NavLink>
+            </li>
+            <li>
+              {" "}
+              <NavLink to="/samochody" activeClassName="selected">
+                Samochody{" "}
+              </NavLink>
+            </li>
+            <li>
+              {" "}
+              <NavLink to="/kontakt" activeClassName="selected">
+                Kontakt{" "}
+              </NavLink>
+            </li>
             {!this.state.logged ? (
               <ul>
                 <li>

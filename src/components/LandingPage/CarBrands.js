@@ -40,12 +40,14 @@ export default class CarBrands extends React.Component {
     if (
       !el.target.classList.contains("active") &&
       "." + el.target.classList.value.replace(" ", ".") !== "." &&
-      this.state.canSelect
+      this.state.canSelect &&
+      this._isMounted
     ) {
-      if (this._isMounted)
+      if (this._isMounted) {
         this.setState({
           loadImage: false
         });
+      }
       this.fetchCars(el.target.getAttribute("name"));
       var elemsActive = document.querySelectorAll(
         "." + el.target.classList.value.replace(" ", ".")
@@ -81,14 +83,14 @@ export default class CarBrands extends React.Component {
         }
       })
       .then(() => {
-        if (this._isMounted) {
-          setTimeout(() => {
+        setTimeout(() => {
+          if (this._isMounted) {
             this.setState({
               carLoader: false,
               canSelect: true
             });
-          }, 500);
-        }
+          }
+        }, 500);
       });
   }
 
@@ -114,7 +116,9 @@ export default class CarBrands extends React.Component {
   }
 
   handleOnLoad() {
-    this.setState({ loadImage: true });
+    if (this._isMounted) {
+      this.setState({ loadImage: true });
+    }
   }
 
   componentDidMount() {
@@ -175,6 +179,7 @@ export default class CarBrands extends React.Component {
                       src={cars.images[indx]}
                       alt={val}
                     />
+                    {!this.state.loadImage && <Loader />}
                     <div className="Brands__bottom">
                       <h4>{cars.dates[indx] + " " + cars.brand + " " + val}</h4>
                       <p>Lokalizacja: {cars.localizations[indx]}</p>

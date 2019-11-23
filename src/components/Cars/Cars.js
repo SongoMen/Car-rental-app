@@ -6,6 +6,7 @@ import Leftbar from "./Leftbar";
 import HideLeftbar from "./HideLeftbar";
 import Input from "../elements/Input";
 import DisplayCars from "../LandingPage/DisplayCars";
+import Loader from "../elements/Loader";
 
 let status = true;
 
@@ -22,7 +23,7 @@ let cars = {
   images: [],
   dates: [],
   localizations: [],
-  brands: ""
+  brands: []
 };
 
 class Cars extends React.Component {
@@ -40,7 +41,8 @@ class Cars extends React.Component {
     this.leftBarChange = this.leftBarChange.bind(this);
   }
 
-  leftBarChange() {
+  leftBarChange(brand, model, img, date, localization) {
+    console.log(arguments);
     status = this.props.leftbar ? false : true;
     this.props.changeLeftBar();
   }
@@ -59,7 +61,7 @@ class Cars extends React.Component {
           cars.images.push(res.image[i]);
           cars.localizations.push(res.localization[i]);
           cars.dates.push(res.date[i]);
-          cars.brands.push(res.model[i]);
+          cars.brands.push(res.brand[i]);
         }
       })
       .then(() => {
@@ -93,13 +95,16 @@ class Cars extends React.Component {
   }
 
   handleOnLoad() {
-    this.setState({ loadImage: true });
+    setTimeout(() => {
+      if (this._isMounted) {
+        this.setState({ loadImage: true });
+      }
+    }, 500);
   }
 
   render() {
     return (
       <div className="Cars">
-        <button onClick={this.leftBarChange}>dsadsa</button>
         <h3>Filtry</h3>
         <div className="Cars__filters">
           <div>
@@ -122,12 +127,25 @@ class Cars extends React.Component {
             <option>cena od najwyższej</option>
           </select>
         </div>
-        {!this.state.loader && (
+        {!this.state.loader ? (
           <div className="Cars__list">
             {cars.models.map((val, indx) => {
+              const { brands, dates, localizations, images } = cars;
               return (
                 <DisplayCars key={indx} show={!this.state.loader}>
-                  <div key={indx} className="Cars__car">
+                  <div
+                    onClick={() =>
+                      this.leftBarChange(
+                        brands[indx],
+                        val,
+                        images[indx],
+                        dates[indx],
+                        localizations[indx]
+                      )
+                    }
+                    key={indx}
+                    className="Cars__car"
+                  >
                     <img
                       style={
                         this.state.loadImage
@@ -135,22 +153,31 @@ class Cars extends React.Component {
                           : { display: "none" }
                       }
                       onLoad={() => this.handleOnLoad()}
-                      src={cars.images[indx]}
+                      src={images[indx]}
                       alt={val}
                     />
+                    {!this.state.loadImage && <Loader />}
                     <div className="Cars__bottom">
-                      <h4>{cars.dates[indx] + " " + cars.brand + " " + val}</h4>
-                      <p>Lokalizacja: {cars.localizations[indx]}</p>
+                      <h4 className="Cars__desc">
+                        {dates[indx] + " " + brands[indx] + " " + val}
+                      </h4>
+                      <p>Lokalizacja: {localizations[indx]}</p>
+                      <div className="Cars__price">
+                        <h4>cena</h4>
+                      </div>
                     </div>
                   </div>
                 </DisplayCars>
               );
             })}
           </div>
+        ) : (
+          <Loader />
         )}
         <HideLeftbar show={this.props.leftbar}>
           <Leftbar />
         </HideLeftbar>
+        {this.props.leftbar && <div className="bg" />}
       </div>
     );
   }
