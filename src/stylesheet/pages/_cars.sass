@@ -24,7 +24,7 @@
     font-weight: 400
   .frameCars
     width: 20%
-    margin: 15px 20px
+    margin: 35px 20px
     height: 370px
     transition: all .3s
     &:hover
@@ -56,6 +56,8 @@
     justify-content: space-between
     cursor: pointer
     border-radius: 5px
+    p
+      white-space: nowrap
     img
       max-width: 100%
       height: auto
@@ -70,6 +72,12 @@
     display: flex
     justify-content: center
     align-items: center
+    svg
+      min-width: 20px
+      min-height: 20px
+      margin-right: 20px
+      fill: white
+      transform: scale(-1, 1);
     h4
       margin: 0
   &__bottom

@@ -15,6 +15,7 @@ export default function Input(props) {
       ref={childRef}
       type={props.type}
       name={props.name}
+      value={props.value ? props.value : ""}
       placeholder={props.placeholder ? props.placeholder : ""}
       required
     />

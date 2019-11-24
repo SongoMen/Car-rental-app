@@ -7,6 +7,9 @@ import HideLeftbar from "./HideLeftbar";
 import Input from "../elements/Input";
 import DisplayCars from "../LandingPage/DisplayCars";
 import Loader from "../elements/Loader";
+import queryString from "query-string";
+
+import { ReactComponent as Tag } from "../../icons/tag.svg";
 
 const mapStateToProps = state => ({
   ...state
@@ -20,6 +23,9 @@ const mapDispatchToProps = dispatch => ({
 let status = true;
 let content = {};
 
+let list = [];
+let list1 = [];
+
 let cars = {
   models: [],
   images: [],
@@ -28,6 +34,13 @@ let cars = {
   brands: []
 };
 
+let filters = {
+  name: [],
+  localization: []
+};
+
+let params;
+
 class Cars extends React.Component {
   _isMounted = false;
 
@@ -35,12 +48,20 @@ class Cars extends React.Component {
     super(props);
     this.state = {
       loader: true,
-      brand: "",
-      name: "",
+      nameSearch: "",
       selectValue: "",
-      loadImage: false
+      loadImage: false,
+      localizationSearch: "",
+      localization: [],
+      model: [],
+      name: [],
+      image: [],
+      brand: [],
+      indexes: [],
+      date: []
     };
     this.leftBarChange = this.leftBarChange.bind(this);
+    this.checkParams = this.checkParams.bind(this);
   }
 
   leftBarChange(brand, model, img, date, localization) {
@@ -59,6 +80,11 @@ class Cars extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
+    this.fetchAllCars();
+    this.checkParams();
+  }
+
+  fetchAllCars() {
     getAllCars()
       .then(res => {
         cars.models = [];
@@ -66,12 +92,18 @@ class Cars extends React.Component {
         cars.localizations = [];
         cars.dates = [];
         cars.brands = [];
+        filters.name = [];
+        filters.localization = [];
         for (let i = 0; i < res.model.length; i++) {
-          cars.models.push(res.model[i]);
-          cars.images.push(res.image[i]);
-          cars.localizations.push(res.localization[i]);
-          cars.dates.push(res.date[i]);
-          cars.brands.push(res.brand[i]);
+          this.setState({
+            model: [...this.state.model, res.model[i]],
+            image: [...this.state.image, res.image[i]],
+            localization: [...this.state.localization, res.localization[i]],
+            brand: [...this.state.brand, res.brand[i]],
+            name: [...this.state.name, res.brand[i] + " " + res.model[i]],
+            date: [...this.state.date, res.date[i]],
+            indexes: [...this.state.indexes, i]
+          });
         }
       })
       .then(() => {
@@ -81,6 +113,42 @@ class Cars extends React.Component {
           });
         }
       });
+  }
+
+  checkParams() {
+    params = queryString.parse(this.props.location.search);
+    if (typeof params.localization !== "undefined" && this._isMounted) {
+      if (this._isMounted) {
+        this.setState({
+          loader: true
+        });
+      }
+      this.filterListLocation(params.localization);
+      console.log("xx");
+    }
+  }
+
+  filterListLocation(event) {
+    let list = [];
+    for (let i = 0; i < this.state.localization.length; i++) {
+      if (
+        this.state.localization[i].toLowerCase().search(event.toLowerCase()) !==
+        -1
+      ) {
+        list.push(i);
+      }
+    }
+    this.setState({ indexes: list });
+  }
+
+  filterListName(event) {
+    let list = [];
+    for (let i = 0; i < this.state.name.length; i++) {
+      if (this.state.name[i].toLowerCase().search(event.toLowerCase()) !== -1) {
+        list.push(i);
+      }
+    }
+    this.setState({ indexes: list });
   }
 
   componentWillUnmount() {
@@ -93,12 +161,19 @@ class Cars extends React.Component {
 
   handleRefName = ref => {
     this.setState({
-      name: ref
+      nameSearch: ref
     });
+    this.filterListName(ref);
+  };
+
+  handleRefLoc = ref => {
+    this.setState({
+      localizationSearch: ref
+    });
+    this.filterListLocation(ref);
   };
 
   handleChange(event) {
-    console.log(event.target.value);
     if (this._isMounted) {
       this.setState({ selectValue: event.target.value });
     }
@@ -124,6 +199,17 @@ class Cars extends React.Component {
               name="brand"
               placeholder="np. BMW M5"
               handleRef={this.handleRefName}
+              value={this.state.nameSearch}
+            />
+          </div>
+          <div>
+            <label htmlFor="brand">Lokalizacja:</label>
+            <Input
+              type="text"
+              name="brand"
+              placeholder="np. Warszawa"
+              handleRef={this.handleRefLoc}
+              value={this.state.localizationSearch}
             />
           </div>
           <select
@@ -139,21 +225,21 @@ class Cars extends React.Component {
         </div>
         {!this.state.loader ? (
           <div className="Cars__list">
-            {cars.models.map((val, indx) => {
-              const { brands, dates, localizations, images } = cars;
+            {this.state.indexes.map((val, indx) => {
+              const { model, brand, date, localization, image } = this.state;
               return (
-                <DisplayCars key={indx} show={!this.state.loader}>
+                <DisplayCars key={val} show={!this.state.loader}>
                   <div
                     onClick={() =>
                       this.leftBarChange(
-                        brands[indx],
-                        val,
-                        images[indx],
-                        dates[indx],
-                        localizations[indx]
+                        brand[val],
+                        model[val],
+                        image[val],
+                        date[val],
+                        localization[val]
                       )
                     }
-                    key={indx}
+                    key={val}
                     className="Cars__car"
                   >
                     <h6 className="Cars__text">RENT NOW</h6>
@@ -164,16 +250,17 @@ class Cars extends React.Component {
                           : { display: "none" }
                       }
                       onLoad={() => this.handleOnLoad()}
-                      src={images[indx]}
+                      src={image[val]}
                       alt={val}
                     />
                     {!this.state.loadImage && <Loader />}
                     <div className="Cars__bottom">
                       <h4 className="Cars__desc">
-                        {dates[indx] + " " + brands[indx] + " " + val}
+                        {date[val] + " " + brand[val] + " " + val}
                       </h4>
-                      <p>Lokalizacja: {localizations[indx]}</p>
+                      <p>Lokalizacja: {localization[val]}</p>
                       <div className="Cars__price">
+                        <Tag />
                         <h4>cena</h4>
                       </div>
                     </div>
@@ -191,6 +278,7 @@ class Cars extends React.Component {
         {this.props.leftbar && (
           <div className="bg" onClick={this.leftBarChange} />
         )}
+        <div className="result" />
       </div>
     );
   }

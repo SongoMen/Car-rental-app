@@ -125,6 +125,11 @@ export default class CarBrands extends React.Component {
     this._isMounted = true;
     this.fetchBrands();
     this.fetchCars("BMW");
+    setTimeout(() => {
+      if (brands.names.length === 0) {
+        this.fetchBrands();
+      }
+    }, 2000);
   }
   componentWillUnMount() {
     this._isMounted = false;
