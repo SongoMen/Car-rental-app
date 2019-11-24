@@ -23,17 +23,6 @@ const mapDispatchToProps = dispatch => ({
 let status = true;
 let content = {};
 
-let list = [];
-let list1 = [];
-
-let cars = {
-  models: [],
-  images: [],
-  dates: [],
-  localizations: [],
-  brands: []
-};
-
 let filters = {
   name: [],
   localization: []
@@ -87,13 +76,6 @@ class Cars extends React.Component {
   fetchAllCars() {
     getAllCars()
       .then(res => {
-        cars.models = [];
-        cars.images = [];
-        cars.localizations = [];
-        cars.dates = [];
-        cars.brands = [];
-        filters.name = [];
-        filters.localization = [];
         for (let i = 0; i < res.model.length; i++) {
           this.setState({
             model: [...this.state.model, res.model[i]],
@@ -119,12 +101,39 @@ class Cars extends React.Component {
     params = queryString.parse(this.props.location.search);
     if (typeof params.localization !== "undefined" && this._isMounted) {
       if (this._isMounted) {
-        this.setState({
-          loader: true
-        });
+        this.setState(
+          {
+            loader: true,
+            localizationSearch: params.localization
+          },
+          () => {
+            this.setState({
+              localizationSearch: params.localization
+            });
+          }
+        );
       }
-      this.filterListLocation(params.localization);
-      console.log("xx");
+      setTimeout(() => {
+        this.filterListLocation(params.localization);
+      }, 500);
+    }
+    if (typeof params.name !== "undefined" && this._isMounted) {
+      if (this._isMounted) {
+        this.setState(
+          {
+            loader: true,
+            nameSearch: params.name
+          },
+          () => {
+            this.setState({
+              nameSearch: params.name
+            });
+          }
+        );
+      }
+      setTimeout(() => {
+        this.filterListName(params.name);
+      }, 500);
     }
   }
 
@@ -144,7 +153,7 @@ class Cars extends React.Component {
   filterListName(event) {
     let list = [];
     for (let i = 0; i < this.state.name.length; i++) {
-      if (this.state.name[i].toLowerCase().search(event.toLowerCase()) !== -1) {
+      if (this.state.name[i].search(event) !== -1) {
         list.push(i);
       }
     }
@@ -256,7 +265,7 @@ class Cars extends React.Component {
                     {!this.state.loadImage && <Loader />}
                     <div className="Cars__bottom">
                       <h4 className="Cars__desc">
-                        {date[val] + " " + brand[val] + " " + val}
+                        {date[val] + " " + brand[val] + " " + model[val]}
                       </h4>
                       <p>Lokalizacja: {localization[val]}</p>
                       <div className="Cars__price">

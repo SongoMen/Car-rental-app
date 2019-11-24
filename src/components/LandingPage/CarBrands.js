@@ -4,6 +4,7 @@ import Loader from "../elements/Loader";
 import parse from "html-react-parser";
 import { Link } from "react-router-dom";
 import DisplayCars from "./DisplayCars";
+import { withRouter } from "react-router";
 
 let brands = {
   names: [],
@@ -19,7 +20,7 @@ let cars = {
   brand: ""
 };
 
-export default class CarBrands extends React.Component {
+class CarBrands extends React.Component {
   _isMounted;
 
   constructor() {
@@ -60,6 +61,13 @@ export default class CarBrands extends React.Component {
         el.classList.add("active");
       });
     }
+  }
+
+  handleSearchCar(value) {
+    this.props.history.push({
+      pathname: "/samochody",
+      search: `?name=${value}`
+    });
   }
 
   fetchCars(brand) {
@@ -172,7 +180,11 @@ export default class CarBrands extends React.Component {
           <div className="Brands__cars">
             {cars.models.map((val, indx) => {
               return (
-                <DisplayCars key={indx} show={!this.state.carLoader}>
+                <DisplayCars
+                  onClick={() => this.handleSearchCar(cars.brand + " " + val)}
+                  key={indx}
+                  show={!this.state.carLoader}
+                >
                   <div key={indx} className="Brands__car">
                     <img
                       style={
@@ -201,3 +213,5 @@ export default class CarBrands extends React.Component {
     );
   }
 }
+
+export default withRouter(CarBrands);
