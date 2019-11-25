@@ -47,13 +47,14 @@ class Cars extends React.Component {
       image: [],
       brand: [],
       indexes: [],
-      date: []
+      date: [],
+      price: []
     };
     this.leftBarChange = this.leftBarChange.bind(this);
     this.checkParams = this.checkParams.bind(this);
   }
 
-  leftBarChange(brand, model, img, date, localization) {
+  leftBarChange(brand, model, img, date, localization, price) {
     status = this.props.leftbar ? false : true;
     if (status === true) {
       content.brand = brand;
@@ -61,7 +62,7 @@ class Cars extends React.Component {
       content.model = model;
       content.date = date;
       content.localization = localization;
-
+      content.price = price;
       this.props.changeContent();
     }
     this.props.changeLeftBar();
@@ -84,7 +85,8 @@ class Cars extends React.Component {
             brand: [...this.state.brand, res.brand[i]],
             name: [...this.state.name, res.brand[i] + " " + res.model[i]],
             date: [...this.state.date, res.date[i]],
-            indexes: [...this.state.indexes, i]
+            indexes: [...this.state.indexes, i],
+            price: [...this.state.price, res.price[i]]
           });
         }
       })
@@ -137,6 +139,15 @@ class Cars extends React.Component {
     }
   }
 
+  sortByPriceLower() {
+    let sorting = this.state.price;
+    if (this._isMounted) {
+      this.setState({
+        indexes: sorting.sort((a, b) => a - b)
+      });
+    }
+  }
+
   filterListLocation(event) {
     let list = [];
     for (let i = 0; i < this.state.localization.length; i++) {
@@ -144,7 +155,17 @@ class Cars extends React.Component {
         this.state.localization[i].toLowerCase().search(event.toLowerCase()) !==
         -1
       ) {
-        list.push(i);
+        if (this.state.nameSearch === "") {
+          list.push(i);
+        } else {
+          if (
+            this.state.name[i]
+              .toLowerCase()
+              .search(this.state.nameSearch.toLowerCase()) !== -1
+          ) {
+            list.push(i);
+          }
+        }
       }
     }
     this.setState({ indexes: list });
@@ -153,8 +174,18 @@ class Cars extends React.Component {
   filterListName(event) {
     let list = [];
     for (let i = 0; i < this.state.name.length; i++) {
-      if (this.state.name[i].search(event) !== -1) {
-        list.push(i);
+      if (this.state.name[i].toLowerCase().search(event.toLowerCase()) !== -1) {
+        if (this.state.localizationSearch === "") {
+          list.push(i);
+        } else {
+          if (
+            this.state.localization[i]
+              .toLowerCase()
+              .search(this.state.localizationSearch.toLowerCase()) !== -1
+          ) {
+            list.push(i);
+          }
+        }
       }
     }
     this.setState({ indexes: list });
@@ -184,7 +215,11 @@ class Cars extends React.Component {
 
   handleChange(event) {
     if (this._isMounted) {
-      this.setState({ selectValue: event.target.value });
+      this.setState({ selectValue: event.target.value }, () => {
+        if (this.state.selectValue === "cena od najniższej") {
+          this.sortByPriceLower();
+        }
+      });
     }
   }
 
@@ -226,8 +261,6 @@ class Cars extends React.Component {
             onChange={this.handleChange.bind(this)}
           >
             <option>Sortuj według marek</option>
-            <option>A-Z</option>
-            <option>Z-A</option>
             <option>cena od najniższej</option>
             <option>cena od najwyższej</option>
           </select>
@@ -235,7 +268,14 @@ class Cars extends React.Component {
         {!this.state.loader ? (
           <div className="Cars__list">
             {this.state.indexes.map((val, indx) => {
-              const { model, brand, date, localization, image } = this.state;
+              const {
+                model,
+                brand,
+                date,
+                localization,
+                image,
+                price
+              } = this.state;
               return (
                 <DisplayCars key={val} show={!this.state.loader}>
                   <div
@@ -245,7 +285,8 @@ class Cars extends React.Component {
                         model[val],
                         image[val],
                         date[val],
-                        localization[val]
+                        localization[val],
+                        price[val]
                       )
                     }
                     key={val}
@@ -270,7 +311,7 @@ class Cars extends React.Component {
                       <p>Lokalizacja: {localization[val]}</p>
                       <div className="Cars__price">
                         <Tag />
-                        <h4>cena</h4>
+                        <h6>{price[val]} zł/24h</h6>
                       </div>
                     </div>
                   </div>

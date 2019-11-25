@@ -45,14 +45,19 @@ export default class Login extends React.Component {
       <div className="Login">
         <div className="form">
           <div className="form__left">
-            <h2>Zaloguj się tutaj.</h2>
             <Fav />
+            <h2>Zaloguj się tutaj.</h2>
           </div>
           <div className="form__right">
             <div>
               <label htmlFor="email">Email</label>
               <br />
-              <Input type="text" name="email" handleRef={this.handleRefEmail} />
+              <Input
+                type="text"
+                name="email"
+                value={this.state.email}
+                handleRef={this.handleRefEmail}
+              />
             </div>
             <div>
               <label htmlFor="password">Hasło</label>
@@ -60,6 +65,7 @@ export default class Login extends React.Component {
               <Input
                 type="password"
                 name="pass"
+                value={this.state.password}
                 handleRef={this.handleRefPassword}
               />
             </div>

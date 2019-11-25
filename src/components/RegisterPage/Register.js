@@ -67,8 +67,8 @@ export default class Register extends React.Component {
       <div className="Login">
         <div className="form">
           <div className="form__left">
-            <h2>Załóż konto</h2>
             <Rocket />
+            <h2>Załóż konto</h2>
           </div>
           <div className="form__right">
             <div>
@@ -78,6 +78,7 @@ export default class Register extends React.Component {
                 type="text"
                 name="first_name"
                 handleRef={this.handleRefFirstName}
+                value={this.state.first_name}
               />
             </div>
             <div>
@@ -87,17 +88,28 @@ export default class Register extends React.Component {
                 type="text"
                 name="last_name"
                 handleRef={this.handleRefLastName}
+                value={this.state.last_name}
               />
             </div>
             <div>
               <label htmlFor="name">Nazwa użytkownika</label>
               <br />
-              <Input type="text" name="name" handleRef={this.handleRefName} />
+              <Input
+                type="text"
+                name="name"
+                handleRef={this.handleRefName}
+                value={this.state.name}
+              />
             </div>
             <div>
               <label htmlFor="email">Email</label>
               <br />
-              <Input type="text" name="email" handleRef={this.handleRefEmail} />
+              <Input
+                type="text"
+                name="email"
+                value={this.state.email}
+                handleRef={this.handleRefEmail}
+              />
             </div>
             <div>
               <label htmlFor="password">Hasło</label>
@@ -105,6 +117,7 @@ export default class Register extends React.Component {
               <Input
                 type="password"
                 name="pass"
+                value={this.state.password}
                 handleRef={this.handleRefPassword}
               />
             </div>

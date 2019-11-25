@@ -61,7 +61,7 @@ export default class Dashboard extends React.Component {
             <div className="Dashboard__cars">
               <div className="Dashboard__title">
                 <Car />
-                <h4>Lista twoich wypożyczonych samochodów:</h4>
+                <h4>Lista twoich zamówień:</h4>
               </div>
             </div>
           </div>

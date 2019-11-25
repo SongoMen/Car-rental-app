@@ -16,6 +16,8 @@ import About from "./components/subpages/about";
 import Cars from "./components/Cars/Cars";
 import Header from "./components/LandingPage/Header";
 import Footer from "./components/LandingPage/Footer";
+import Contact from "./components/subpages/contact";
+import Admin from "./components/Admin/Admin";
 
 function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
@@ -84,6 +86,8 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/" component={LandingPage} />
+            <Route exact path="/kontakt" component={Contact} />
+            <Route exact path="/admin" component={Admin} />
             <PublicRoute
               authed={this.state.authed}
               path="/login"

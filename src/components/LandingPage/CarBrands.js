@@ -64,6 +64,7 @@ class CarBrands extends React.Component {
   }
 
   handleSearchCar(value) {
+    console.log("xx");
     this.props.history.push({
       pathname: "/samochody",
       search: `?name=${value}`
@@ -103,24 +104,26 @@ class CarBrands extends React.Component {
   }
 
   fetchBrands() {
-    getBrands()
-      .then(res => {
-        for (let i = 0; i < res.names.length; i++) {
-          brands.names.push(res.names[i]);
-          brands.logo.push(res.logo[i]);
-          brands.num = res.number;
-        }
-      })
-      .then(() => {
-        if (this._isMounted) {
-          this.setState({
-            loader: false
-          });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (brands.names.length === 0) {
+      getBrands()
+        .then(res => {
+          for (let i = 0; i < res.names.length; i++) {
+            brands.names.push(res.names[i]);
+            brands.logo.push(res.logo[i]);
+            brands.num = res.number;
+          }
+        })
+        .then(() => {
+          if (this._isMounted) {
+            this.setState({
+              loader: false
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 
   handleOnLoad() {
@@ -171,7 +174,7 @@ class CarBrands extends React.Component {
           {!this.state.loader && (
             <Link to="/samochody">
               <div className="Brands__option">
-                <span className="color">{brands.num - 5}+ </span>&nbsp; More
+                <span className="color">{brands.num - 5}+ </span>
               </div>
             </Link>
           )}
@@ -180,12 +183,12 @@ class CarBrands extends React.Component {
           <div className="Brands__cars">
             {cars.models.map((val, indx) => {
               return (
-                <DisplayCars
-                  onClick={() => this.handleSearchCar(cars.brand + " " + val)}
-                  key={indx}
-                  show={!this.state.carLoader}
-                >
-                  <div key={indx} className="Brands__car">
+                <DisplayCars key={indx} show={!this.state.carLoader}>
+                  <div
+                    onClick={() => this.handleSearchCar(cars.brand + " " + val)}
+                    key={indx}
+                    className="Brands__car"
+                  >
                     <img
                       style={
                         this.state.loadImage

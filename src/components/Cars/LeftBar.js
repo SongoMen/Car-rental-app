@@ -109,7 +109,14 @@ class LeftBar extends React.Component {
   }
 
   render() {
-    const { image, brand, model, date, localization } = this.props.content;
+    const {
+      image,
+      brand,
+      model,
+      date,
+      localization,
+      price
+    } = this.props.content;
     return (
       <div className="Leftbar">
         {this.props.content.length === 0 ? (
@@ -144,6 +151,8 @@ class LeftBar extends React.Component {
               {!this.state.loadLenght && this.state.length !== "" && (
                 <h4 className="Leftbar__days">
                   Ilość dni: {this.state.length}
+                  <br />
+                  Koszt: {this.state.length * price} zł
                 </h4>
               )}
               {!this.state.loadLenght &&

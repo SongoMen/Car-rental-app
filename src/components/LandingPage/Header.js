@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Logo from "../elements/Logo";
-import { checkIfLoggedIn, logout } from "../../auth";
+import { checkIfLoggedIn, logout, isAdmin } from "../../auth";
 
 export default class Header extends React.Component {
   _isMounted = false;
@@ -11,11 +11,17 @@ export default class Header extends React.Component {
     super();
     this.state = {
       logged: null,
-      position: "static"
+      position: "static",
+      isAdmin: false
     };
   }
   componentDidMount() {
     this._isMounted = true;
+    isAdmin().then(res => {
+      this.setState({
+        isAdmin: res.isAdmin === "1" ? true : false
+      });
+    });
     if (this._isMounted) this.setState({ logged: checkIfLoggedIn() });
   }
   componentWillUnmount() {
@@ -78,6 +84,11 @@ export default class Header extends React.Component {
                 <h4 className="Header__logout" onClick={logout}>
                   Wyloguj się
                 </h4>
+                {this.state.isAdmin && (
+                  <Link to="/admin">
+                    <h4 className="Header__user admin">Panel admina</h4>
+                  </Link>
+                )}
               </div>
             )}
           </ul>

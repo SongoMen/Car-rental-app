@@ -1,11 +1,9 @@
 import React from "react";
-import { numberOfCars } from "../../auth";
+import { numberOfCars, getLocalizations } from "../../auth";
 import { withRouter } from "react-router";
 
 import { ReactComponent as Search } from "../../icons/search.svg";
 var Typeahead = require("react-typeahead").Typeahead;
-
-let cities = ["Lublin", "Warszawa"];
 
 class Banner extends React.Component {
   _isMounted;
@@ -14,7 +12,8 @@ class Banner extends React.Component {
     super();
     this.state = {
       numberOfCars: 0,
-      localizations: 0
+      localizations: 0,
+      cities: []
     };
     this.searchCars = this.searchCars.bind(this);
   }
@@ -33,9 +32,22 @@ class Banner extends React.Component {
       });
   }
 
+  fetchLocalizations() {
+    getLocalizations().then(res => {
+      for (let i = 0; i < res.localizations.length; i++) {
+        if (this._isMounted) {
+          this.setState({
+            cities: [...this.state.cities, res.localizations[i]]
+          });
+        }
+      }
+    });
+  }
+
   componentDidMount() {
     this._isMounted = true;
     this.fetchCars();
+    this.fetchLocalizations();
     setTimeout(() => {
       if (this.state.numberOfCars === 0) {
         this.fetchCars();
@@ -60,7 +72,7 @@ class Banner extends React.Component {
         <div className="banner__title">
           <h1>Wypożyczalnia samochodów za najniższą cenę. Zacznij od dziś !</h1>
           <p>
-            <span className="color"> {this.state.numberOfCars}</span> samochody
+            <span className="color"> {this.state.numberOfCars}</span> samochodów
             w <span className="color"> {this.state.localizations}</span>{" "}
             lokalizacjach
           </p>
@@ -70,7 +82,7 @@ class Banner extends React.Component {
             <label htmlFor="city">Gdzie chcesz odebrać samochód ?</label>
             <div className="banner__bottom">
               <div>
-                <Typeahead options={cities} maxVisible={2} />
+                <Typeahead options={this.state.cities} maxVisible={2} />
                 <ul className="banner__results" id="results" />
               </div>
               <button className="btn" onClick={this.searchCars}>
