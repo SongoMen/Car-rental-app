@@ -2,6 +2,7 @@ import React from "react";
 import { isAdmin, getUserInfo } from "../../auth";
 import Loader from "../elements/Loader";
 import Add from "./Add";
+import AddUser from "./AddUser";
 
 let status;
 
@@ -65,6 +66,7 @@ export default class Admin extends React.Component {
               </div>
             </div>
             {this.state.section === "dodajsam" && <Add />}
+            {this.state.section === "dodajuz" && <AddUser />}
           </div>
         )}
         {!status && !this.state.loading && <h1>Error</h1>}

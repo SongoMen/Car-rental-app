@@ -17,7 +17,6 @@ export default class AddUser extends React.Component {
       email: "",
       isAdmin: ""
     };
-    this.changeSection = this.changeSection.bind(this);
   }
 
   componentDidMount() {
@@ -36,7 +35,7 @@ export default class AddUser extends React.Component {
     }
   };
 
-  handleReflast_name = ref => {
+  handleRefLast_name = ref => {
     if (this._isMounted) {
       this.setState({
         last_name: ref

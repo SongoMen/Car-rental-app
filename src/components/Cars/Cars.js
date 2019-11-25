@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => ({
 let status = true;
 let content = {};
 let holdPrices = [];
+let holdIndex = [];
 let params;
 
 class Cars extends React.Component {
@@ -70,6 +71,14 @@ class Cars extends React.Component {
     this.checkParams();
   }
 
+  sortByBrand() {
+    if (this._isMounted) {
+      this.setState({
+        indexes: holdIndex
+      });
+    }
+  }
+
   fetchAllCars() {
     getAllCars()
       .then(res => {
@@ -84,6 +93,7 @@ class Cars extends React.Component {
             indexes: [...this.state.indexes, i],
             price: [...this.state.price, res.price[i]]
           });
+          holdIndex.push(i);
           holdPrices.push(res.price[i]);
         }
       })
@@ -151,7 +161,7 @@ class Cars extends React.Component {
   }
 
   sortByPriceLower() {
-    var test = holdPrices.slice();
+    var test = this.state.price.slice();
     this.sortWithIndeces(test);
     this.setState({
       indexes: test.sortIndices
@@ -174,7 +184,7 @@ class Cars extends React.Component {
   }
 
   sortByPriceHigher() {
-    var test = holdPrices.slice();
+    var test = this.state.price.slice();
     this.sortWithIndeces2(test);
     this.setState({
       indexes: test.sortIndices
@@ -201,7 +211,7 @@ class Cars extends React.Component {
         }
       }
     }
-    this.setState({ indexes: list });
+    this.setState({ indexes: list, selectValue: "Sortuj wedlug marek" });
   }
 
   filterListName(event) {
@@ -221,7 +231,7 @@ class Cars extends React.Component {
         }
       }
     }
-    this.setState({ indexes: list });
+    this.setState({ indexes: list, selectValue: "Sortuj wedlug marek" });
   }
 
   componentWillUnmount() {
@@ -251,9 +261,10 @@ class Cars extends React.Component {
       this.setState({ selectValue: event.target.value }, () => {
         if (this.state.selectValue === "cena od najniższej") {
           this.sortByPriceLower();
-        }
-        if (this.state.selectValue === "cena od najwyższej") {
+        } else if (this.state.selectValue === "cena od najwyższej") {
           this.sortByPriceHigher();
+        } else if (this.state.selectValue === "Sortuj według marek") {
+          this.sortByBrand();
         }
       });
     }

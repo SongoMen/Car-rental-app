@@ -78,15 +78,15 @@ export default class Header extends React.Component {
               </ul>
             ) : (
               <div className="Header__logged">
-                <Link to="/dashboard">
-                  <h4 className="Header__user">{user}</h4>
+                <Link className="btn" to="/dashboard">
+                  <h5 className="Header__user">{user}</h5>
                 </Link>
-                <h4 className="Header__logout" onClick={logout}>
+                <h5 className="btn" onClick={logout}>
                   Wyloguj się
-                </h4>
+                </h5>
                 {this.state.isAdmin && (
-                  <Link to="/admin">
-                    <h4 className="Header__user admin">Panel admina</h4>
+                  <Link className="btn admin" to="/admin">
+                    <h5 className="Header__user admin">Panel admina</h5>
                   </Link>
                 )}
               </div>
