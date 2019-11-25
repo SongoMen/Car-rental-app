@@ -64,7 +64,6 @@ class CarBrands extends React.Component {
   }
 
   handleSearchCar(value) {
-    console.log("xx");
     this.props.history.push({
       pathname: "/samochody",
       search: `?name=${value}`
@@ -127,9 +126,11 @@ class CarBrands extends React.Component {
   }
 
   handleOnLoad() {
-    if (this._isMounted) {
-      this.setState({ loadImage: true });
-    }
+    setTimeout(() => {
+      if (this._isMounted) {
+        this.setState({ loadImage: true });
+      }
+    }, 500);
   }
 
   componentDidMount() {

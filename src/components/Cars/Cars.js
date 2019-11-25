@@ -22,12 +22,7 @@ const mapDispatchToProps = dispatch => ({
 
 let status = true;
 let content = {};
-
-let filters = {
-  name: [],
-  localization: []
-};
-
+let holdPrices = [];
 let params;
 
 class Cars extends React.Component {
@@ -52,6 +47,7 @@ class Cars extends React.Component {
     };
     this.leftBarChange = this.leftBarChange.bind(this);
     this.checkParams = this.checkParams.bind(this);
+    this.sortByPriceLower = this.sortByPriceLower.bind(this);
   }
 
   leftBarChange(brand, model, img, date, localization, price) {
@@ -88,6 +84,7 @@ class Cars extends React.Component {
             indexes: [...this.state.indexes, i],
             price: [...this.state.price, res.price[i]]
           });
+          holdPrices.push(res.price[i]);
         }
       })
       .then(() => {
@@ -138,14 +135,50 @@ class Cars extends React.Component {
       }, 500);
     }
   }
+  sortWithIndeces(toSort) {
+    for (var i = 0; i < toSort.length; i++) {
+      toSort[i] = [toSort[i], i];
+    }
+    toSort.sort(function(left, right) {
+      return left[0] < right[0] ? -1 : 1;
+    });
+    toSort.sortIndices = [];
+    for (var j = 0; j < toSort.length; j++) {
+      toSort.sortIndices.push(toSort[j][1]);
+      toSort[j] = toSort[j][0];
+    }
+    return toSort;
+  }
 
   sortByPriceLower() {
-    let sorting = this.state.price;
-    if (this._isMounted) {
-      this.setState({
-        indexes: sorting.sort((a, b) => a - b)
-      });
+    var test = holdPrices.slice();
+    this.sortWithIndeces(test);
+    this.setState({
+      indexes: test.sortIndices
+    });
+  }
+
+  sortWithIndeces2(toSort) {
+    for (var i = 0; i < toSort.length; i++) {
+      toSort[i] = [toSort[i], i];
     }
+    toSort.sort(function(left, right) {
+      return left[0] > right[0] ? -1 : 1;
+    });
+    toSort.sortIndices = [];
+    for (var j = 0; j < toSort.length; j++) {
+      toSort.sortIndices.push(toSort[j][1]);
+      toSort[j] = toSort[j][0];
+    }
+    return toSort;
+  }
+
+  sortByPriceHigher() {
+    var test = holdPrices.slice();
+    this.sortWithIndeces2(test);
+    this.setState({
+      indexes: test.sortIndices
+    });
   }
 
   filterListLocation(event) {
@@ -218,6 +251,9 @@ class Cars extends React.Component {
       this.setState({ selectValue: event.target.value }, () => {
         if (this.state.selectValue === "cena od najniższej") {
           this.sortByPriceLower();
+        }
+        if (this.state.selectValue === "cena od najwyższej") {
+          this.sortByPriceHigher();
         }
       });
     }
