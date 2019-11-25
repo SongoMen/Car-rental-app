@@ -1,5 +1,5 @@
 import React from "react";
-import { logout, getUserInfo } from "../../auth";
+import { addCar, getBrands } from "../../auth";
 import Loader from "../elements/Loader";
 import Input from "../elements/Input";
 
@@ -19,13 +19,33 @@ export default class Add extends React.Component {
       price: ""
     };
     this.changeSection = this.changeSection.bind(this);
+    this.addCarFunc = this.addCarFunc.bind(this);
   }
 
   componentDidMount() {
     this._isMounted = true;
   }
+
   componentWillUnmount() {
     this._isMounted = false;
+  }
+
+  addCarFunc(e) {
+    e.preventDefault();
+    const { brand, model, date, image, localization, price } = this.state;
+    if (
+      brand.length > 0 &&
+      model.length > 0 &&
+      date.length > 0 &&
+      image.length > 0 &&
+      localization.length > 0 &&
+      price.length > 0
+    ) {
+      console.log("x");
+      addCar(brand, model, date, image, localization, price).then(res => {
+        console.log(res);
+      });
+    }
   }
 
   changeSection(el) {
@@ -119,13 +139,13 @@ export default class Add extends React.Component {
               </tr>
               <tr>
                 <td>
-                  <b>Data produkcji</b>
+                  <b>Rok produkcji</b>
                 </td>
                 <td>
                   <Input
                     handleRef={this.handleRefDate}
-                    type="text"
-                    placeholder="Data"
+                    type="number"
+                    placeholder="Rok"
                     value={this.state.date}
                   />
                 </td>
@@ -163,7 +183,7 @@ export default class Add extends React.Component {
                 <td>
                   <Input
                     handleRef={this.handleRefPrice}
-                    type="text"
+                    type="number"
                     placeholder="Cena"
                     value={this.state.price}
                   />
@@ -172,7 +192,12 @@ export default class Add extends React.Component {
               <tr>
                 <td />
                 <td>
-                  <input className="btn" type="submit" value="Dodaj" />
+                  <input
+                    className="btn"
+                    onClick={this.addCarFunc}
+                    type="submit"
+                    value="Dodaj"
+                  />
                 </td>
               </tr>
             </tbody>
