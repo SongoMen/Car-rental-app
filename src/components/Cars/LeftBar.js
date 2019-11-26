@@ -52,13 +52,18 @@ class LeftBar extends React.Component {
   }
 
   handleChange = date => {
-    if (this.state.endDate && this.state.endDate.getTime() > date.getTime()) {
+    let today = new Date();
+    if (
+      this.state.endDate &&
+      this.state.endDate.getTime() > date.getTime() &&
+      today.getTime() <= date.getTime()
+    ) {
       if (this._isMounted) {
         this.setState({
           startDate: date
         });
       }
-    } else if (!this.state.endDate) {
+    } else if (!this.state.endDate && today.getTime() <= date.getTime()) {
       if (this._isMounted) {
         this.setState({
           startDate: date
@@ -68,16 +73,19 @@ class LeftBar extends React.Component {
     this.checkDifference();
   };
   handleChange2 = date => {
+    let today = new Date();
+
     if (
       this.state.startDate &&
-      this.state.startDate.getTime() < date.getTime()
+      this.state.startDate.getTime() < date.getTime() &&
+      today.getTime() <= date.getTime()
     ) {
       if (this._isMounted) {
         this.setState({
           endDate: date
         });
       }
-    } else if (!this.state.startDate) {
+    } else if (!this.state.startDate && today.getTime() <= date.getTime()) {
       if (this._isMounted) {
         this.setState({
           endDate: date
