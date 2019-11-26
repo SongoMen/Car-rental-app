@@ -21,7 +21,7 @@ let cars = {
 };
 
 class CarBrands extends React.Component {
-  _isMounted;
+  _isMounted = false;
 
   constructor() {
     super();
@@ -103,6 +103,7 @@ class CarBrands extends React.Component {
   }
 
   fetchBrands() {
+    console.log(brands.names);
     if (brands.names.length === 0) {
       getBrands()
         .then(res => {
@@ -122,6 +123,12 @@ class CarBrands extends React.Component {
         .catch(err => {
           console.log(err);
         });
+    } else {
+      if (this._isMounted) {
+        this.setState({
+          loader: false
+        });
+      }
     }
   }
 

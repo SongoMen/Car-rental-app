@@ -3,6 +3,8 @@ import { isAdmin, getUserInfo } from "../../auth";
 import Loader from "../elements/Loader";
 import Add from "./Add";
 import AddUser from "./AddUser";
+import RemoveCar from "./RemoveCar";
+import EditCar from "./EditCar";
 
 let status;
 
@@ -67,6 +69,8 @@ export default class Admin extends React.Component {
             </div>
             {this.state.section === "dodajsam" && <Add />}
             {this.state.section === "dodajuz" && <AddUser />}
+            {this.state.section === "usun" && <RemoveCar />}
+            {this.state.section === "edytuj" && <EditCar />}
           </div>
         )}
         {!status && !this.state.loading && <h1>Error</h1>}

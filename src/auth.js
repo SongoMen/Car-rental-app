@@ -152,6 +152,20 @@ export function addCar(
     });
 }
 
+export function update(model, production_date, image, localization, price) {
+  const params = new URLSearchParams();
+  params.append("model", model);
+  params.append("production_date", production_date);
+  params.append("image", image);
+  params.append("localization", localization);
+  params.append("price", price);
+  return axios
+    .post("https://backendba.000webhostapp.com/api/update.php", params, config)
+    .catch(function(error) {
+      return error;
+    });
+}
+
 export function register(first_name, last_name, name, email, password) {
   const params = new URLSearchParams();
   params.append("first_name", first_name);

@@ -21,6 +21,11 @@ export default class AddUser extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
+    if (this._isMounted) {
+      this.setState({
+        loading: false
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -79,96 +84,99 @@ export default class AddUser extends React.Component {
     return (
       <div className="AddUser">
         <h1>Dodaj użytkownika</h1>
-        <form>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <b>Imię</b>
-                </td>
-                <td>
-                  <Input
-                    handleRef={this.handleRefFirst_name}
-                    type="text"
-                    placeholder="Imię"
-                    value={this.state.first_name}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Nazwisko</b>
-                </td>
-                <td>
-                  <Input
-                    handleRef={this.handleRefLast_name}
-                    type="text"
-                    placeholder="Nazwisko"
-                    value={this.state.last_name}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Nazwa użytkownika</b>
-                </td>
-                <td>
-                  <Input
-                    handleRef={this.handleRefName}
-                    type="text"
-                    placeholder="Nazwa użytkownika"
-                    value={this.state.name}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Hasło</b>
-                </td>
-                <td>
-                  <Input
-                    handleRef={this.handleRefPassword}
-                    type="text"
-                    placeholder="Hasło"
-                    value={this.state.password}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Email</b>
-                </td>
-                <td>
-                  <Input
-                    handleRef={this.handleRefEmail}
-                    type="text"
-                    placeholder="Email"
-                    value={this.state.email}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <b>Admin</b>
-                </td>
-                <td>
-                  <Input
-                    handleRef={this.handleRefIsAdmin}
-                    type="text"
-                    placeholder="Admin"
-                    value={this.state.isAdmin}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td />
-                <td>
-                  <input className="btn" type="submit" value="Dodaj" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
+        {this.state.loading && <Loader />}
+        {!this.state.loading && (
+          <form>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>Imię</b>
+                  </td>
+                  <td>
+                    <Input
+                      handleRef={this.handleRefFirst_name}
+                      type="text"
+                      placeholder="Imię"
+                      value={this.state.first_name}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Nazwisko</b>
+                  </td>
+                  <td>
+                    <Input
+                      handleRef={this.handleRefLast_name}
+                      type="text"
+                      placeholder="Nazwisko"
+                      value={this.state.last_name}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Nazwa użytkownika</b>
+                  </td>
+                  <td>
+                    <Input
+                      handleRef={this.handleRefName}
+                      type="text"
+                      placeholder="Nazwa użytkownika"
+                      value={this.state.name}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Hasło</b>
+                  </td>
+                  <td>
+                    <Input
+                      handleRef={this.handleRefPassword}
+                      type="text"
+                      placeholder="Hasło"
+                      value={this.state.password}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Email</b>
+                  </td>
+                  <td>
+                    <Input
+                      handleRef={this.handleRefEmail}
+                      type="text"
+                      placeholder="Email"
+                      value={this.state.email}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Admin</b>
+                  </td>
+                  <td>
+                    <Input
+                      handleRef={this.handleRefIsAdmin}
+                      type="text"
+                      placeholder="Admin"
+                      value={this.state.isAdmin}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td />
+                  <td>
+                    <input className="btn" type="submit" value="Dodaj" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        )}
       </div>
     );
   }

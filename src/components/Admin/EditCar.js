@@ -1,38 +1,47 @@
 import React from "react";
-import { addCar, getBrands } from "../../auth";
 import Loader from "../elements/Loader";
 import Input from "../elements/Input";
+import { getAllCars, update } from "../../auth";
 
-export default class Add extends React.Component {
+export default class EditCar extends React.Component {
   _isMounted = false;
 
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      msg: "",
-      selected: "",
-      brand: "",
-      model: "",
-      date: "",
-      image: "",
-      localization: "",
-      price: "",
-      brands: []
+      brand: [],
+      date: [],
+      image: [],
+      localization: [],
+      model: [],
+      price: [],
+      selected: ""
     };
-    this.changeSection = this.changeSection.bind(this);
-    this.addCarFunc = this.addCarFunc.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this._isMounted = true;
-    getBrands()
+    getAllCars()
       .then(res => {
         if (this._isMounted) {
           this.setState({
-            brands: res.names
+            loading: true
           });
+        }
+        for (let i = 0; i < res.brand.length; i++) {
+          if (this._isMounted) {
+            this.setState({
+              brand: [...this.state.brand, res.brand[i]],
+              date: [...this.state.date, res.date[i]],
+              image: [...this.state.image, res.image[i]],
+              localization: [...this.state.localization, res.localization[i]],
+              model: [...this.state.model, res.model[i]],
+              price: [...this.state.price, res.price[i]]
+            });
+          }
         }
       })
       .then(() => {
@@ -48,57 +57,10 @@ export default class Add extends React.Component {
     this._isMounted = false;
   }
 
-  addCarFunc(e) {
-    e.preventDefault();
-    const { model, date, image, localization, price } = this.state;
-    if (
-      model.length > 0 &&
-      date.length > 0 &&
-      image.length > 0 &&
-      localization.length > 0 &&
-      price.length > 0
-    ) {
-      console.log("x");
-      addCar(this.state.selected, model, date, image, localization, price).then(
-        res => {
-          if (this._isMounted) {
-            this.setState({
-              msg: res.data
-            });
-          }
-        }
-      );
-    }
-  }
-
-  changeSection(el) {
+  handleRefFirst_name = ref => {
     if (this._isMounted) {
       this.setState({
-        section: el
-      });
-    }
-  }
-
-  handleRefBrand = ref => {
-    if (this._isMounted) {
-      this.setState({
-        brand: ref
-      });
-    }
-  };
-
-  handleRefModel = ref => {
-    if (this._isMounted) {
-      this.setState({
-        model: ref
-      });
-    }
-  };
-
-  handleRefDate = ref => {
-    if (this._isMounted) {
-      this.setState({
-        date: ref
+        first_name: ref
       });
     }
   };
@@ -106,7 +68,15 @@ export default class Add extends React.Component {
   handleRefImage = ref => {
     if (this._isMounted) {
       this.setState({
-        image: ref
+        imageInput: ref
+      });
+    }
+  };
+
+  handleRefModel = ref => {
+    if (this._isMounted) {
+      this.setState({
+        modelInput: ref
       });
     }
   };
@@ -114,7 +84,15 @@ export default class Add extends React.Component {
   handleRefLocalization = ref => {
     if (this._isMounted) {
       this.setState({
-        localization: ref
+        localizationInput: ref
+      });
+    }
+  };
+
+  handleRefDate = ref => {
+    if (this._isMounted) {
+      this.setState({
+        dateInput: ref
       });
     }
   };
@@ -122,43 +100,68 @@ export default class Add extends React.Component {
   handleRefPrice = ref => {
     if (this._isMounted) {
       this.setState({
-        price: ref
+        prcieInput: ref
       });
     }
   };
-
   handleOnChange(ref) {
+    let indx = this.state.model.indexOf(ref.target.value.split(" ")[1]);
     if (this._isMounted) {
       this.setState({
-        selected: ref.target.value
+        selected: ref.target.value,
+        prcieInput: this.state.price[indx],
+        imageInput: this.state.image[indx],
+        modelInput: this.state.model[indx],
+        dateInput: this.state.date[indx],
+        localizationInput: this.state.localization[indx]
       });
     }
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    const {
+      selected,
+      dateInput,
+      imageInput,
+      prcieInput,
+      localizationInput
+    } = this.state;
+    update(
+      selected.split(" ")[1],
+      dateInput,
+      imageInput,
+      localizationInput,
+      prcieInput
+    ).then(res => {
+      if (this._isMounted) {
+        this.setState({
+          msg: res.data
+        });
+      }
+    });
+  }
+
   render() {
     return (
-      <div className="Add">
-        <h1>Dodaj samochód</h1>
+      <div className="EditCar">
+        <h1>Edytuj samochód</h1>
         {this.state.loading && <Loader />}
+        {!this.state.loading && (
+          <select value={this.state.selected} onChange={this.handleOnChange}>
+            {this.state.model.map((val, indx) => {
+              return (
+                <option name={indx} key={indx}>
+                  {this.state.brand[indx] + " " + val}{" "}
+                </option>
+              );
+            })}
+          </select>
+        )}
         {!this.state.loading && (
           <form>
             <table>
               <tbody>
-                <tr>
-                  <td>
-                    <b>Marka</b>
-                  </td>
-                  <td>
-                    <select
-                      value={this.state.selected}
-                      onChange={this.handleOnChange}
-                    >
-                      {this.state.brands.map((val, indx) => {
-                        return <option key={indx}>{val}</option>;
-                      })}
-                    </select>
-                  </td>
-                </tr>
                 <tr>
                   <td>
                     <b>Model</b>
@@ -167,8 +170,8 @@ export default class Add extends React.Component {
                     <Input
                       handleRef={this.handleRefModel}
                       type="text"
-                      placeholder="Model"
-                      value={this.state.model}
+                      placeholder="Nazwisko"
+                      value={this.state.modelInput}
                     />
                   </td>
                 </tr>
@@ -179,9 +182,9 @@ export default class Add extends React.Component {
                   <td>
                     <Input
                       handleRef={this.handleRefDate}
-                      type="number"
-                      placeholder="Rok"
-                      value={this.state.date}
+                      type="text"
+                      placeholder="Rok produkcji"
+                      value={this.state.dateInput}
                     />
                   </td>
                 </tr>
@@ -193,8 +196,8 @@ export default class Add extends React.Component {
                     <Input
                       handleRef={this.handleRefImage}
                       type="text"
-                      placeholder="Zdjecie"
-                      value={this.state.image}
+                      placeholder="Hasło"
+                      value={this.state.imageInput}
                     />
                   </td>
                 </tr>
@@ -206,8 +209,8 @@ export default class Add extends React.Component {
                     <Input
                       handleRef={this.handleRefLocalization}
                       type="text"
-                      placeholder="Lokalizacja"
-                      value={this.state.localization}
+                      placeholder="Email"
+                      value={this.state.localizationInput}
                     />
                   </td>
                 </tr>
@@ -218,9 +221,9 @@ export default class Add extends React.Component {
                   <td>
                     <Input
                       handleRef={this.handleRefPrice}
-                      type="number"
-                      placeholder="Cena"
-                      value={this.state.price}
+                      type="text"
+                      placeholder="Admin"
+                      value={this.state.prcieInput}
                     />
                   </td>
                 </tr>
@@ -229,9 +232,9 @@ export default class Add extends React.Component {
                   <td>
                     <input
                       className="btn"
-                      onClick={this.addCarFunc}
+                      onClick={this.handleClick}
                       type="submit"
-                      value="Dodaj"
+                      value="Aktualizuj"
                     />
                   </td>
                 </tr>
@@ -239,7 +242,6 @@ export default class Add extends React.Component {
             </table>
           </form>
         )}
-        {this.state.msg}
       </div>
     );
   }
