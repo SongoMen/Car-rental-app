@@ -20,6 +20,13 @@ export default class Register extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   handleRefPassword = ref => {
     this.setState({
       password: ref
@@ -51,15 +58,38 @@ export default class Register extends React.Component {
   };
 
   handleRegister() {
-    register(
-      this.state.first_name,
-      this.state.last_name,
-      this.state.name,
-      this.state.email,
-      this.state.password
-    ).then(res => {
-      this.setState({ msg: res.data.message });
-    });
+    const { first_name, last_name, name, email, password } = this.state;
+    const regex = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+    if (regex.test(email)) {
+      if (
+        first_name.length > 0 &&
+        last_name.length > 0 &&
+        name.length > 0 &&
+        password.length > 0
+      ) {
+        register(
+          this.state.first_name,
+          this.state.last_name,
+          this.state.name,
+          this.state.email,
+          this.state.password
+        ).then(res => {
+          if (this._isMounted) {
+            this.setState({ msg: res.data.message });
+          }
+        });
+      } else {
+        if (this._isMounted) {
+          this.setState({ msg: "Uzupełnij wszystkie pola." });
+        }
+      }
+    } else {
+      if (this._isMounted) {
+        this.setState({ msg: "Podałeś zły email." });
+      }
+    }
   }
 
   render() {

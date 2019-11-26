@@ -18,9 +18,11 @@ export default class Header extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     isAdmin().then(res => {
-      this.setState({
-        isAdmin: res.isAdmin === "1" ? true : false
-      });
+      if (this._isMounted) {
+        this.setState({
+          isAdmin: res.isAdmin === "1" ? true : false
+        });
+      }
     });
     if (this._isMounted) this.setState({ logged: checkIfLoggedIn() });
   }

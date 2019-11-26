@@ -1,6 +1,7 @@
 import React from "react";
 import Loader from "../elements/Loader";
 import Input from "../elements/Input";
+import { addUser } from "../../auth";
 
 export default class AddUser extends React.Component {
   _isMounted = false;
@@ -9,14 +10,15 @@ export default class AddUser extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      section: "",
+      msg: "",
       first_name: "",
       last_name: "",
       name: "",
       password: "",
       email: "",
-      isAdmin: ""
+      isAdmin: "Nie"
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -75,10 +77,36 @@ export default class AddUser extends React.Component {
   handleRefIsAdmin = ref => {
     if (this._isMounted) {
       this.setState({
-        isAdmin: ref
+        isAdmin: ref.target.value === "Tak" ? 1 : 0
       });
     }
   };
+  handleClick(e) {
+    e.preventDefault();
+    const {
+      first_name,
+      last_name,
+      name,
+      email,
+      password,
+      isAdmin
+    } = this.state;
+    addUser(
+      first_name,
+      last_name,
+      name,
+      email,
+      password,
+      isAdmin === "Nie" ? 0 : 1
+    ).then(res => {
+      console.log(res);
+      if (this._isMounted && typeof res.data !== "undefined") {
+        this.setState({
+          msg: res.data.message
+        });
+      }
+    });
+  }
 
   render() {
     return (
@@ -159,24 +187,31 @@ export default class AddUser extends React.Component {
                     <b>Admin</b>
                   </td>
                   <td>
-                    <Input
-                      handleRef={this.handleRefIsAdmin}
-                      type="text"
-                      placeholder="Admin"
+                    <select
                       value={this.state.isAdmin}
-                    />
+                      onChange={this.handleRefIsAdmin}
+                    >
+                      <option>Tak</option>
+                      <option>Nie</option>
+                    </select>
                   </td>
                 </tr>
                 <tr>
                   <td />
                   <td>
-                    <input className="btn" type="submit" value="Dodaj" />
+                    <input
+                      className="btn"
+                      onClick={this.handleClick}
+                      type="submit"
+                      value="Dodaj"
+                    />
                   </td>
                 </tr>
               </tbody>
             </table>
           </form>
         )}
+        {this.state.msg}
       </div>
     );
   }

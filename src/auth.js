@@ -43,7 +43,11 @@ export function getBrands() {
   params.append("first_name", "X");
 
   return axios
-    .post("https://backendba.000webhostapp.com/api/brands.php", params, config)
+    .post(
+      "https://backendba.000webhostapp.com/api/cars/brands.php",
+      params,
+      config
+    )
     .then(function(response) {
       return response.data;
     })
@@ -58,7 +62,7 @@ export function getUserInfo() {
 
   return axios
     .post(
-      "https://backendba.000webhostapp.com/api/userinfo.php",
+      "https://backendba.000webhostapp.com/api/user/userinfo.php",
       params,
       config
     )
@@ -75,7 +79,11 @@ export function getAllCars() {
   params.append("email", cookies.get("email"));
 
   return axios
-    .post("https://backendba.000webhostapp.com/api/allcars.php", params, config)
+    .post(
+      "https://backendba.000webhostapp.com/api/cars/allcars.php",
+      params,
+      config
+    )
     .then(function(response) {
       return response.data;
     })
@@ -89,7 +97,11 @@ export function getCars(brand) {
   params.append("model", brand);
 
   return axios
-    .post("https://backendba.000webhostapp.com/api/cars.php", params, config)
+    .post(
+      "https://backendba.000webhostapp.com/api/cars/cars.php",
+      params,
+      config
+    )
     .then(function(response) {
       return response.data;
     })
@@ -103,7 +115,11 @@ export function isAdmin() {
   params.append("email", cookies.get("email"));
 
   return axios
-    .post("https://backendba.000webhostapp.com/api/isAdmin.php", params, config)
+    .post(
+      "https://backendba.000webhostapp.com/api/user/isAdmin.php",
+      params,
+      config
+    )
     .then(function(response) {
       return response.data;
     })
@@ -146,7 +162,11 @@ export function addCar(
   params.append("localization", localization);
   params.append("price", price);
   return axios
-    .post("https://backendba.000webhostapp.com/api/addCar.php", params, config)
+    .post(
+      "https://backendba.000webhostapp.com/api/cars/addCar.php",
+      params,
+      config
+    )
     .catch(function(error) {
       return error;
     });
@@ -160,7 +180,31 @@ export function update(model, production_date, image, localization, price) {
   params.append("localization", localization);
   params.append("price", price);
   return axios
-    .post("https://backendba.000webhostapp.com/api/update.php", params, config)
+    .post(
+      "https://backendba.000webhostapp.com/api/cars/update.php",
+      params,
+      config
+    )
+    .catch(function(error) {
+      return error;
+    });
+}
+
+export function addUser(first_name, last_name, name, email, password, isAdmin) {
+  const params = new URLSearchParams();
+  params.append("first_name", first_name);
+  params.append("last_name", last_name);
+  params.append("name", name);
+  params.append("email", email);
+  params.append("password", password);
+  params.append("isAdmin", isAdmin);
+
+  return axios
+    .post(
+      "https://backendba.000webhostapp.com/api/user/addUser.php",
+      params,
+      config
+    )
     .catch(function(error) {
       return error;
     });

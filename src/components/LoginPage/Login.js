@@ -35,7 +35,7 @@ export default class Login extends React.Component {
   handleLogin() {
     login(this.state.email, this.state.password).catch(() => {
       this.setState({
-        msg: "Wrong email or password"
+        msg: "Błędny email lub hasło"
       });
     });
   }
