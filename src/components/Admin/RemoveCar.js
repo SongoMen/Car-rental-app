@@ -1,6 +1,5 @@
 import React from "react";
 import Loader from "../elements/Loader";
-import Input from "../elements/Input";
 import { getAllCars } from "../../auth";
 
 export default class AddUser extends React.Component {

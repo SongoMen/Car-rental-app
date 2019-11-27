@@ -150,7 +150,7 @@ class CarBrands extends React.Component {
       }
     }, 2000);
   }
-  componentWillUnMount() {
+  componentWillUnmount() {
     this._isMounted = false;
   }
 

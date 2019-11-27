@@ -121,7 +121,6 @@ class LeftBar extends React.Component {
       image,
       brand,
       model,
-      date,
       localization,
       price
     } = this.props.content;

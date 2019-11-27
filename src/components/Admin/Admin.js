@@ -1,5 +1,5 @@
 import React from "react";
-import { isAdmin, getUserInfo } from "../../auth";
+import { isAdmin } from "../../auth";
 import Loader from "../elements/Loader";
 import Add from "./Add";
 import AddUser from "./AddUser";

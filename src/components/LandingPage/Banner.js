@@ -54,7 +54,7 @@ class Banner extends React.Component {
       }
     }, 5000);
   }
-  componentWillUnMount() {
+  componentWillUnmount() {
     this._isMounted = false;
   }
 

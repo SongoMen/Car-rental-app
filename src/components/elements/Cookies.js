@@ -3,9 +3,10 @@ import Cookies from "universal-cookie";
 
 import { ReactComponent as CookieIcon } from "../../icons/cookie.svg";
 
-let render = true;
 
 const CookiesNotification = () => {
+  let render = true;
+
   const cookies = new Cookies();
   const [show, setShow] = useState(true);
   function save() {
