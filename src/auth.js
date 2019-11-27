@@ -92,13 +92,33 @@ export function getAllCars() {
     });
 }
 
-export function getCars(brand) {
+export function getCars(model) {
   const params = new URLSearchParams();
-  params.append("model", brand);
+  params.append("model", model);
 
   return axios
     .post(
       "https://backendba.000webhostapp.com/api/cars/cars.php",
+      params,
+      config
+    )
+    .then(function(response) {
+      return response.data;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
+export function removeCar(brand, model) {
+  const params = new URLSearchParams();
+
+  params.append("brand", brand);
+  params.append("model", model);
+
+  return axios
+    .post(
+      "https://backendba.000webhostapp.com/api/cars/removecar.php",
       params,
       config
     )

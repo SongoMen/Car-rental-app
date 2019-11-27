@@ -117,13 +117,7 @@ class LeftBar extends React.Component {
   }
 
   render() {
-    const {
-      image,
-      brand,
-      model,
-      localization,
-      price
-    } = this.props.content;
+    const { image, brand, model, localization, price } = this.props.content;
     return (
       <div className="Leftbar">
         {this.props.content.length === 0 ? (

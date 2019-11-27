@@ -170,7 +170,7 @@ export default class EditCar extends React.Component {
                     <Input
                       handleRef={this.handleRefModel}
                       type="text"
-                      placeholder="Nazwisko"
+                      placeholder="Model"
                       value={this.state.modelInput}
                     />
                   </td>
@@ -196,7 +196,7 @@ export default class EditCar extends React.Component {
                     <Input
                       handleRef={this.handleRefImage}
                       type="text"
-                      placeholder="Hasło"
+                      placeholder="Zdjęcie"
                       value={this.state.imageInput}
                     />
                   </td>
@@ -209,7 +209,7 @@ export default class EditCar extends React.Component {
                     <Input
                       handleRef={this.handleRefLocalization}
                       type="text"
-                      placeholder="Email"
+                      placeholder="Lokalizacja"
                       value={this.state.localizationInput}
                     />
                   </td>
@@ -222,7 +222,7 @@ export default class EditCar extends React.Component {
                     <Input
                       handleRef={this.handleRefPrice}
                       type="text"
-                      placeholder="Admin"
+                      placeholder="Cena"
                       value={this.state.prcieInput}
                     />
                   </td>
