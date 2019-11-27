@@ -103,7 +103,6 @@ class CarBrands extends React.Component {
   }
 
   fetchBrands() {
-    console.log(brands.names);
     if (brands.names.length === 0) {
       getBrands()
         .then(res => {

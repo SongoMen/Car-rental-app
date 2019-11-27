@@ -91,7 +91,7 @@ class Cars extends React.Component {
             name: [...this.state.name, res.brand[i] + " " + res.model[i]],
             date: [...this.state.date, res.date[i]],
             indexes: [...this.state.indexes, i],
-            price: [...this.state.price, res.price[i]]
+            price: [...this.state.price, Number(res.price[i])]
           });
           holdIndex.push(i);
           holdPrices.push(res.price[i]);
@@ -161,6 +161,7 @@ class Cars extends React.Component {
   }
 
   sortByPriceLower() {
+    console.log(this.state.price);
     var test = this.state.price.slice();
     this.sortWithIndeces(test);
     this.setState({
@@ -184,6 +185,8 @@ class Cars extends React.Component {
   }
 
   sortByPriceHigher() {
+    console.log(this.state.price);
+
     var test = this.state.price.slice();
     this.sortWithIndeces2(test);
     this.setState({
