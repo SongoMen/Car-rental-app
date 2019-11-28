@@ -41,6 +41,7 @@ export default class Login extends React.Component {
   }
 
   render() {
+    document.title = "Samochodex - Logowanie";
     return (
       <div className="Login">
         <div className="form">

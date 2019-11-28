@@ -93,6 +93,7 @@ export default class Register extends React.Component {
   }
 
   render() {
+    document.title = "Samochodex - Rejestracja";
     return (
       <div className="Login">
         <div className="form">

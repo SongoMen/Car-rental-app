@@ -47,6 +47,7 @@ export default class Admin extends React.Component {
   }
 
   render() {
+    document.title = "Samochodex - Admin";
     return (
       <div className="Admin">
         {this.state.loading && <Loader />}

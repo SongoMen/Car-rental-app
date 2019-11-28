@@ -77,6 +77,7 @@ export default class Dashboard extends React.Component {
       localization,
       price
     } = orders;
+    document.title = "Samochodex - Panel";
     return (
       <div className="Dashboard">
         {this.state.loading ? (

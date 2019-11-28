@@ -43,6 +43,7 @@ export default class Contact extends React.Component {
     }
   };
   render() {
+    document.title = "Samochodex - Kontakt";
     return (
       <div className="Contact">
         <div className="Contact__title">
