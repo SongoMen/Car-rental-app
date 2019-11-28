@@ -14,7 +14,7 @@ const About = () => {
         </div>
       </div>
       <div className="About__content">
-        <p>
+        <h3>
           Posiadamy ogromne doświadczenie w motoryzacji. Zajmujemy się importem
           samochodów z zagranicy. Posiadamy szeroki wybór samochodów. Zarówno
           przystępnych cenowo, jak i marki bardziej luksuwowe z bogato
@@ -23,7 +23,7 @@ const About = () => {
           ważny przegląd techniczny oraz wszelką niezbędną dokumentację.
           Zapraszamy do zapoznania się z szerokim wachlarzem samochodów
           dostępnym na naszej stronie internetowej.
-        </p>
+        </h3>
       </div>
     </div>
   );

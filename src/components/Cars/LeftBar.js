@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { changeLeftBar } from "../../actions/actions";
 import Loader from "../elements/Loader";
-import { checkIfLoggedIn } from "../../auth";
+import { checkIfLoggedIn, rentCar } from "../../auth";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { Link } from "react-router-dom";
 
@@ -31,9 +31,11 @@ class LeftBar extends React.Component {
       startDate: "",
       endDate: "",
       length: "",
-      loadLenght: false
+      loadLength: false,
+      msg: ""
     };
     this.handleClose = this.handleClose.bind(this);
+    this.handleRent = this.handleRent.bind(this);
   }
 
   handleClose() {
@@ -74,7 +76,6 @@ class LeftBar extends React.Component {
   };
   handleChange2 = date => {
     let today = new Date();
-
     if (
       this.state.startDate &&
       this.state.startDate.getTime() < date.getTime() &&
@@ -95,9 +96,35 @@ class LeftBar extends React.Component {
     this.checkDifference();
   };
 
+  handleRent() {
+    const { brand, model, price } = this.props.content;
+    rentCar(
+      this.formatDate(this.state.startDate),
+      this.formatDate(this.state.endDate),
+      brand,
+      model,
+      price
+    ).then(res => {
+      console.log(res);
+      if (this._isMounted) {
+        this.setState({
+          msg: res.message
+        });
+      }
+    });
+  }
+
+  formatDate(date) {
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+
+    return day + "/" + monthIndex + 1 + "/" + year;
+  }
+
   checkDifference() {
     setTimeout(() => {
-      this.setState({ loadLenght: true });
+      this.setState({ loadLength: true });
       if (this.state.endDate && this.state.startDate) {
         let diff =
           this.state.startDate.getTime() - this.state.endDate.getTime();
@@ -110,7 +137,7 @@ class LeftBar extends React.Component {
       }
       setTimeout(() => {
         if (this._isMounted) {
-          this.setState({ loadLenght: false });
+          this.setState({ loadLength: false });
         }
       }, 500);
     }, 1000);
@@ -149,19 +176,21 @@ class LeftBar extends React.Component {
                   dateFormat="d/M/yyyy"
                 />
               </div>
-              {!this.state.loadLenght && this.state.length !== "" && (
+              {!this.state.loadLength && this.state.length !== "" && (
                 <h4 className="Leftbar__days">
                   Ilość dni: {this.state.length}
                   <br />
                   Koszt: {this.state.length * price} zł
                 </h4>
               )}
-              {!this.state.loadLenght &&
+              {!this.state.loadLength &&
                 this.state.length !== "" &&
                 this.state.isLogged && (
-                  <button className="btn">Wypożycz teraz</button>
+                  <button className="btn" onClick={this.handleRent}>
+                    Wypożycz teraz
+                  </button>
                 )}
-              {!this.state.loadLenght &&
+              {!this.state.loadLength &&
                 this.state.length !== "" &&
                 !this.state.isLogged && (
                   <Link to="/login">
@@ -170,7 +199,8 @@ class LeftBar extends React.Component {
                     </button>
                   </Link>
                 )}
-              {this.state.loadLenght && <Loader />}
+              {this.state.loadLength && <Loader />}
+              {this.state.msg}
             </div>
           </div>
         )}

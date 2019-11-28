@@ -1,15 +1,19 @@
 import React from "react";
-import { logout, getUserInfo } from "../../auth";
+import { logout, getOrders } from "../../auth";
 import Loader from "../elements/Loader";
 
 import { ReactComponent as Car } from "../../icons/car.svg";
+import { ReactComponent as Calendar } from "../../icons/calendar.svg";
+import { ReactComponent as Map } from "../../icons/placeholder.svg";
 
-let user = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  name: "",
-  created: ""
+let orders = {
+  brand: [],
+  model: [],
+  price: [],
+  start_date: [],
+  end_date: [],
+  localization: [],
+  image: []
 };
 
 export default class Dashboard extends React.Component {
@@ -24,18 +28,34 @@ export default class Dashboard extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    getUserInfo()
+    getOrders()
       .then(res => {
-        console.log(res);
-        user.created = res.created;
-        user.first_name = res.first_name;
-        user.last_name = res.last_name;
-        user.email = res.email;
-        user.name = res.name;
+        const {
+          brand,
+          model,
+          end_date,
+          start_date,
+          image,
+          localization,
+          price
+        } = orders;
+        if (res.brand.length !== brand.length) {
+          for (let i = 0; i < res.brand.length; i++) {
+            brand.push(res.brand[i]);
+            model.push(res.model[i]);
+            end_date.push(res.end_date[i]);
+            start_date.push(res.start_date[i]);
+            image.push(res.image[i]);
+            localization.push(res.localization[i]);
+            price.push(res.price[i]);
+          }
+        }
       })
       .then(() => {
         if (this._isMounted) {
-          this.setState({ loading: false });
+          this.setState({
+            loading: false
+          });
         }
       });
   }
@@ -48,7 +68,15 @@ export default class Dashboard extends React.Component {
   }
 
   render() {
-    const { first_name, last_name, name, created, email } = user;
+    const {
+      brand,
+      model,
+      end_date,
+      start_date,
+      image,
+      localization,
+      price
+    } = orders;
     return (
       <div className="Dashboard">
         {this.state.loading ? (
@@ -62,6 +90,31 @@ export default class Dashboard extends React.Component {
               <div className="Dashboard__title">
                 <Car />
                 <h4>Lista twoich zamówień:</h4>
+              </div>
+              <div className="Dashboard__orders">
+                {brand.map((val, indx) => {
+                  return (
+                    <div key={indx} className="Dashboard__order">
+                      <div className="Dashboard__left">
+                        <img src={image[indx]} alt={val} />
+                        <div className="Dashboard__desc">
+                          <h3>{val + " " + model[indx]}</h3>
+                          <div className="Dashboard__dates">
+                            <Calendar />
+                            <h4>
+                              {start_date[indx]} - {end_date[indx]}
+                            </h4>
+                          </div>
+                          <div className="Dashboard__place">
+                            <Map />
+                            <h4>{localization[indx]}</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <h4 className="price">{price[indx]}zł</h4>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

@@ -130,6 +130,29 @@ export function removeCar(brand, model) {
     });
 }
 
+export function rentCar(start, end, brand, model, price) {
+  const params = new URLSearchParams();
+  params.append("start_date", start);
+  params.append("end_date", end);
+  params.append("brand", brand);
+  params.append("model", model);
+  params.append("price", price);
+  params.append("email", cookies.get("email"));
+
+  return axios
+    .post(
+      "https://backendba.000webhostapp.com/api/cars/rentcar.php",
+      params,
+      config
+    )
+    .then(function(response) {
+      return response.data;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
 export function isAdmin() {
   const params = new URLSearchParams();
   params.append("email", cookies.get("email"));
@@ -137,6 +160,24 @@ export function isAdmin() {
   return axios
     .post(
       "https://backendba.000webhostapp.com/api/user/isAdmin.php",
+      params,
+      config
+    )
+    .then(function(response) {
+      return response.data;
+    })
+    .catch(function(error) {
+      return error;
+    });
+}
+
+export function getOrders() {
+  const params = new URLSearchParams();
+  params.append("email", cookies.get("email"));
+
+  return axios
+    .post(
+      "https://backendba.000webhostapp.com/api/user/orders.php",
       params,
       config
     )

@@ -161,7 +161,6 @@ class Cars extends React.Component {
   }
 
   sortByPriceLower() {
-    console.log(this.state.price);
     var test = this.state.price.slice();
     this.sortWithIndeces(test);
     this.setState({
@@ -185,8 +184,6 @@ class Cars extends React.Component {
   }
 
   sortByPriceHigher() {
-    console.log(this.state.price);
-
     var test = this.state.price.slice();
     this.sortWithIndeces2(test);
     this.setState({
@@ -214,7 +211,7 @@ class Cars extends React.Component {
         }
       }
     }
-    this.setState({ indexes: list, selectValue: "Sortuj wedlug marek" });
+    this.setState({ indexes: list, selectValue: "Sortuj wedlug marki" });
   }
 
   filterListName(event) {
@@ -234,7 +231,7 @@ class Cars extends React.Component {
         }
       }
     }
-    this.setState({ indexes: list, selectValue: "Sortuj wedlug marek" });
+    this.setState({ indexes: list, selectValue: "Sortuj wedlug marki" });
   }
 
   componentWillUnmount() {
@@ -266,7 +263,7 @@ class Cars extends React.Component {
           this.sortByPriceLower();
         } else if (this.state.selectValue === "cena od najwyższej") {
           this.sortByPriceHigher();
-        } else if (this.state.selectValue === "Sortuj według marek") {
+        } else if (this.state.selectValue === "Sortuj wedlug marki") {
           this.sortByBrand();
         }
       });
@@ -310,7 +307,7 @@ class Cars extends React.Component {
             value={this.state.selectValue}
             onChange={this.handleChange.bind(this)}
           >
-            <option>Sortuj według marek</option>
+            <option>Sortuj wedlug marki</option>
             <option>cena od najniższej</option>
             <option>cena od najwyższej</option>
           </select>
@@ -326,6 +323,16 @@ class Cars extends React.Component {
                 image,
                 price
               } = this.state;
+              /*if (
+                this.state.brand[indx] !== this.state.brand[indx - 1] &&
+                typeof this.state.brand[indx + 1] !== "undefined"
+              ) {
+                return (
+                  <div className="Cars__brandName">
+                    <h3>{this.state.brand[indx]}</h3>
+                  </div>
+                );
+              }*/
               return (
                 <DisplayCars key={val} show={!this.state.loader}>
                   <div
