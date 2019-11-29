@@ -26,10 +26,21 @@ export default class Dashboard extends React.Component {
     };
   }
 
+  clearOrders() {
+    orders.brand = [];
+    orders.model = [];
+    orders.end_date = [];
+    orders.start_date = [];
+    orders.image = [];
+    orders.localization = [];
+    orders.price = [];
+  }
+
   componentDidMount() {
     this._isMounted = true;
     getOrders()
       .then(res => {
+        this.clearOrders();
         const {
           brand,
           model,
@@ -102,13 +113,13 @@ export default class Dashboard extends React.Component {
                           <h3>{val + " " + model[indx]}</h3>
                           <div className="Dashboard__dates">
                             <Calendar />
-                            <h4>
+                            <h5>
                               {start_date[indx]} - {end_date[indx]}
-                            </h4>
+                            </h5>
                           </div>
                           <div className="Dashboard__place">
                             <Map />
-                            <h4>{localization[indx]}</h4>
+                            <h5>{localization[indx]}</h5>
                           </div>
                         </div>
                       </div>

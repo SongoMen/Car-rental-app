@@ -4,9 +4,9 @@ import { changeLeftBar } from "../../actions/actions";
 import Loader from "../elements/Loader";
 import { checkIfLoggedIn, rentCar } from "../../auth";
 import DatePicker, { registerLocale } from "react-datepicker";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-import pl from "date-fns/locale/pl";
+import { pl } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { ReactComponent as X } from "../../icons/x.svg";
@@ -103,23 +103,27 @@ class LeftBar extends React.Component {
       this.formatDate(this.state.endDate),
       brand,
       model,
-      price
-    ).then(res => {
-      console.log(res);
-      if (this._isMounted) {
-        this.setState({
-          msg: res.message
+      this.state.length * price
+    )
+      .then(res => {
+        if (this._isMounted) {
+          this.setState({
+            msg: res.message
+          });
+        }
+      })
+      .then(() => {
+        this.props.history.push({
+          pathname: "/dashboard"
         });
-      }
-    });
+      });
   }
 
   formatDate(date) {
     var day = date.getDate();
-    var monthIndex = date.getMonth();
+    var monthIndex = Number(date.getMonth()) + 1;
     var year = date.getFullYear();
-
-    return day + "/" + monthIndex + 1 + "/" + year;
+    return day + "/" + Number(monthIndex) + "/" + year;
   }
 
   checkDifference() {
@@ -208,7 +212,9 @@ class LeftBar extends React.Component {
     );
   }
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LeftBar);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(LeftBar)
+);
