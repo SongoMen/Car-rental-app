@@ -96,12 +96,12 @@ export default class Dashboard extends React.Component {
         ) : (
           <div className="Dashboard__content">
             <div className="Dashboard__info">
-              <h1>Panel Główny</h1>
+              <h1>User Panel</h1>
             </div>
             <div className="Dashboard__cars">
               <div className="Dashboard__title">
                 <Car />
-                <h4>Lista twoich zamówień:</h4>
+                <h4>List of your orders:</h4>
               </div>
               <div className="Dashboard__orders">
                 {brand.map((val, indx) => {
@@ -123,7 +123,7 @@ export default class Dashboard extends React.Component {
                           </div>
                         </div>
                       </div>
-                      <h4 className="price">{price[indx]}zł</h4>
+                      <h4 className="price">${price[indx]}</h4>
                     </div>
                   );
                 })}

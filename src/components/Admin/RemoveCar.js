@@ -54,7 +54,6 @@ export default class AddUser extends React.Component {
       this.state.selected.split(" ")[0],
       this.state.selected.split(" ")[1]
     ).then(res => {
-      console.log(res);
       if (this._isMounted) {
         this.setState({
           msg: res.message
@@ -66,7 +65,7 @@ export default class AddUser extends React.Component {
   render() {
     return (
       <div className="RemoveCar">
-        <h1>Usuń samochód</h1>
+        <h1>Remove car</h1>
         {this.state.loading && <Loader />}
         {!this.state.loading && (
           <select value={this.state.selected} onChange={this.handleOnChange}>
@@ -77,7 +76,7 @@ export default class AddUser extends React.Component {
         )}
         {!this.state.loading && (
           <button className="btn" onClick={this.handleClick}>
-            USUŃ
+            Remove
           </button>
         )}
         <h4>{this.state.msg}</h4>

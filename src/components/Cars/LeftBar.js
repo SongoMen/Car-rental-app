@@ -3,15 +3,13 @@ import { connect } from "react-redux";
 import { changeLeftBar } from "../../actions/actions";
 import Loader from "../elements/Loader";
 import { checkIfLoggedIn, rentCar } from "../../auth";
-import DatePicker, { registerLocale } from "react-datepicker";
+import DatePicker from "react-datepicker";
 import { Link, withRouter } from "react-router-dom";
 
 import { pl } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { ReactComponent as X } from "../../icons/x.svg";
-
-registerLocale("pl", pl);
 
 const mapStateToProps = state => ({
   ...state
@@ -159,11 +157,11 @@ class LeftBar extends React.Component {
             <img src={image} alt={brand} />
             <div className="Leftbar__info">
               <h2>{brand + " " + model}</h2>
-              <h5>Lokalizacja: {localization}</h5>
+              <h5>Localization: {localization}</h5>
             </div>
             <div className="Leftbar__rent">
               <div>
-                <label>Wybierz datę początkową wypożyczenia</label>
+                <label>Select beginning date of rent</label>
                 <DatePicker
                   selected={this.state.startDate}
                   onChange={this.handleChange}
@@ -172,7 +170,7 @@ class LeftBar extends React.Component {
                 />
               </div>
               <div>
-                <label>Wybierz datę końcową wypożyczenia</label>
+                <label>Select ending date of rent</label>
                 <DatePicker
                   selected={this.state.endDate}
                   onChange={this.handleChange2}
@@ -182,16 +180,16 @@ class LeftBar extends React.Component {
               </div>
               {!this.state.loadLength && this.state.length !== "" && (
                 <h4 className="Leftbar__days">
-                  Ilość dni: {this.state.length}
+                  Number of days: {this.state.length}
                   <br />
-                  Koszt: {this.state.length * price} zł
+                  Price: ${this.state.length * price}
                 </h4>
               )}
               {!this.state.loadLength &&
                 this.state.length !== "" &&
                 this.state.isLogged && (
                   <button className="btn" onClick={this.handleRent}>
-                    Wypożycz teraz
+                    Rent now
                   </button>
                 )}
               {!this.state.loadLength &&
@@ -199,7 +197,7 @@ class LeftBar extends React.Component {
                 !this.state.isLogged && (
                   <Link to="/login">
                     <button className="btn inactive">
-                      Zaloguj się aby wypożyczyć
+                      Log in to rent
                     </button>
                   </Link>
                 )}

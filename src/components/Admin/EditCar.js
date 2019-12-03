@@ -145,7 +145,7 @@ export default class EditCar extends React.Component {
   render() {
     return (
       <div className="EditCar">
-        <h1>Edytuj samochód</h1>
+        <h1>Edit car</h1>
         {this.state.loading && <Loader />}
         {!this.state.loading && (
           <select value={this.state.selected} onChange={this.handleOnChange}>
@@ -177,52 +177,52 @@ export default class EditCar extends React.Component {
                 </tr>
                 <tr>
                   <td>
-                    <b>Rok produkcji</b>
+                    <b>Production year</b>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefDate}
                       type="text"
-                      placeholder="Rok produkcji"
+                      placeholder="Production year"
                       value={this.state.dateInput}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Zdjęcie</b>
+                    <b>Photo</b>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefImage}
                       type="text"
-                      placeholder="Zdjęcie"
+                      placeholder="Photo"
                       value={this.state.imageInput}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Lokalizacja</b>
+                    <b>Localization</b>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefLocalization}
                       type="text"
-                      placeholder="Lokalizacja"
+                      placeholder="Localization"
                       value={this.state.localizationInput}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Cena</b>
+                    <b>Price</b>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefPrice}
                       type="text"
-                      placeholder="Cena"
+                      placeholder="Price"
                       value={this.state.prcieInput}
                     />
                   </td>
@@ -234,7 +234,7 @@ export default class EditCar extends React.Component {
                       className="btn"
                       onClick={this.handleClick}
                       type="submit"
-                      value="Aktualizuj"
+                      value="Update"
                     />
                   </td>
                 </tr>
@@ -242,6 +242,7 @@ export default class EditCar extends React.Component {
             </table>
           </form>
         )}
+        {this.state.msg}
       </div>
     );
   }

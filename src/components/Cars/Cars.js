@@ -285,21 +285,21 @@ class Cars extends React.Component {
         <h3>Filtry</h3>
         <div className="Cars__filters">
           <div>
-            <label htmlFor="brand">Nazwa samochodu:</label>
+            <label htmlFor="brand">Car name:</label>
             <Input
               type="text"
               name="brand"
-              placeholder="np. BMW M5"
+              placeholder="e.g. BMW M5"
               handleRef={this.handleRefName}
               value={this.state.nameSearch}
             />
           </div>
           <div>
-            <label htmlFor="brand">Lokalizacja:</label>
+            <label htmlFor="brand">Localization:</label>
             <Input
               type="text"
               name="brand"
-              placeholder="np. Warszawa"
+              placeholder="e.g. Warsaw"
               handleRef={this.handleRefLoc}
               value={this.state.localizationSearch}
             />
@@ -308,9 +308,9 @@ class Cars extends React.Component {
             value={this.state.selectValue}
             onChange={this.handleChange.bind(this)}
           >
-            <option>Sortuj wedlug marki</option>
-            <option>cena od najniższej</option>
-            <option>cena od najwyższej</option>
+            <option>Sort by brand</option>
+            <option>Sort from lower price</option>
+            <option>Sort from higher price</option>
           </select>
         </div>
         {!this.state.loader ? (
@@ -369,7 +369,7 @@ class Cars extends React.Component {
                       <p>Lokalizacja: {localization[val]}</p>
                       <div className="Cars__price">
                         <Tag />
-                        <h6>{price[val]} zł/24h</h6>
+                        <h6>${price[val]}/24h</h6>
                       </div>
                     </div>
                   </div>

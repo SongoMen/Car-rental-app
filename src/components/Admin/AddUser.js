@@ -11,8 +11,8 @@ export default class AddUser extends React.Component {
     this.state = {
       loading: true,
       msg: "",
-      first_name: "",
-      last_name: "",
+      firstName: "",
+      lastName: "",
       name: "",
       password: "",
       email: "",
@@ -34,18 +34,18 @@ export default class AddUser extends React.Component {
     this._isMounted = false;
   }
 
-  handleRefFirst_name = ref => {
+  handleReffirstName = ref => {
     if (this._isMounted) {
       this.setState({
-        first_name: ref
+        firstName: ref
       });
     }
   };
 
-  handleRefLast_name = ref => {
+  handleReflastName = ref => {
     if (this._isMounted) {
       this.setState({
-        last_name: ref
+        lastName: ref
       });
     }
   };
@@ -84,16 +84,16 @@ export default class AddUser extends React.Component {
   handleClick(e) {
     e.preventDefault();
     const {
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       name,
       email,
       password,
       isAdmin
     } = this.state;
     addUser(
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       name,
       email,
       password,
@@ -111,7 +111,7 @@ export default class AddUser extends React.Component {
   render() {
     return (
       <div className="AddUser">
-        <h1>Dodaj użytkownika</h1>
+        <h1>Add User</h1>
         {this.state.loading && <Loader />}
         {!this.state.loading && (
           <form>
@@ -119,52 +119,52 @@ export default class AddUser extends React.Component {
               <tbody>
                 <tr>
                   <td>
-                    <b>Imię</b>
+                    <b>First Name</b>
                   </td>
                   <td>
                     <Input
-                      handleRef={this.handleRefFirst_name}
+                      handleRef={this.handleReffirstName}
                       type="text"
-                      placeholder="Imię"
-                      value={this.state.first_name}
+                      placeholder="First Name"
+                      value={this.state.firstName}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Nazwisko</b>
+                    <b>Last Name</b>
                   </td>
                   <td>
                     <Input
-                      handleRef={this.handleRefLast_name}
+                      handleRef={this.handleReflastName}
                       type="text"
-                      placeholder="Nazwisko"
-                      value={this.state.last_name}
+                      placeholder="Last Name"
+                      value={this.state.lastName}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Nazwa użytkownika</b>
+                    <b>Name</b>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefName}
                       type="text"
-                      placeholder="Nazwa użytkownika"
+                      placeholder="Name"
                       value={this.state.name}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <b>Hasło</b>
+                    <b>Password</b>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefPassword}
                       type="text"
-                      placeholder="Hasło"
+                      placeholder="Password"
                       value={this.state.password}
                     />
                   </td>
@@ -191,8 +191,8 @@ export default class AddUser extends React.Component {
                       value={this.state.isAdmin}
                       onChange={this.handleRefIsAdmin}
                     >
-                      <option>Tak</option>
-                      <option>Nie</option>
+                      <option>Yes</option>
+                      <option>No</option>
                     </select>
                   </td>
                 </tr>
