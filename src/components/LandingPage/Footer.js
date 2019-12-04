@@ -10,10 +10,10 @@ const Footer = () => {
       <div className="Footer__col">
         <ul>
           <li>
-            <Link to="/onas">O nas</Link>
+            <Link to="/onas">About us</Link>
           </li>
           <li>
-            <Link to="/Kontakt">Kontakt</Link>
+            <Link to="/Kontakt">Contact</Link>
           </li>
         </ul>
       </div>

@@ -70,23 +70,23 @@ class Banner extends React.Component {
     return (
       <div className="banner">
         <div className="banner__title">
-          <h1>Wypożyczalnia samochodów za najniższą cenę. Zacznij od dziś !</h1>
+          <h1>Ubeatable price. Rent car from today!</h1>
           <p>
-            <span className="color"> {this.state.numberOfCars}</span> samochodów
-            w <span className="color"> {this.state.localizations}</span>{" "}
-            lokalizacjach
+            <span className="color"> {this.state.numberOfCars}</span> cars
+            in <span className="color"> {this.state.localizations}</span>{" "}
+            localizations
           </p>
         </div>
         <div className="banner__search">
           <div className="banner__input">
-            <label htmlFor="city">Gdzie chcesz odebrać samochód ?</label>
+            <label htmlFor="city">Where would you like to rent car ?</label>
             <div className="banner__bottom">
               <div>
                 <Typeahead options={this.state.cities} maxVisible={2} />
                 <ul className="banner__results" id="results" />
               </div>
               <button className="btn" onClick={this.searchCars}>
-                <Search /> Szukaj
+                <Search /> Search
               </button>
             </div>
           </div>

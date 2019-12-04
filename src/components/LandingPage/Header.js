@@ -44,37 +44,37 @@ export default class Header extends React.Component {
             <li>
               {" "}
               <NavLink exact to="/" activeClassName="selected">
-                Strona główna{" "}
+                Main page{" "}
               </NavLink>
             </li>
             <li>
               {" "}
               <NavLink to="/onas" activeClassName="selected">
-                O nas{" "}
+                About us{" "}
               </NavLink>
             </li>
             <li>
               {" "}
               <NavLink to="/samochody" activeClassName="selected">
-                Samochody{" "}
+                Cars{" "}
               </NavLink>
             </li>
             <li>
               {" "}
               <NavLink to="/kontakt" activeClassName="selected">
-                Kontakt{" "}
+                Contact{" "}
               </NavLink>
             </li>
             {!this.state.logged ? (
               <ul>
                 <li>
                   <NavLink to="/login">
-                    <button className="btn loginButton">Zaloguj się</button>
+                    <button className="btn loginButton">Login</button>
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/register">
-                    <button className="btn loginButton">Zarejestruj się</button>
+                    <button className="btn loginButton">Register</button>
                   </NavLink>
                 </li>
               </ul>
@@ -84,11 +84,11 @@ export default class Header extends React.Component {
                   <h5 className="Header__user">{user}</h5>
                 </Link>
                 <h5 className="btn" onClick={logout}>
-                  Wyloguj się
+                  Logout
                 </h5>
                 {this.state.isAdmin && (
                   <Link className="btn admin" to="/admin">
-                    <h5 className="Header__user admin">Panel admina</h5>
+                    <h5 className="Header__user admin">Admin Panel</h5>
                   </Link>
                 )}
               </div>

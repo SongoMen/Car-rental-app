@@ -156,7 +156,7 @@ class CarBrands extends React.Component {
   render() {
     return (
       <div className="Brands">
-        <h1>Nasze samochody</h1>
+        <h1>Our cars</h1>
         {this.state.laoder && <Loader />}
         <div className="Brands__options">
           {!this.state.loader &&
@@ -209,7 +209,7 @@ class CarBrands extends React.Component {
                     {!this.state.loadImage && <Loader />}
                     <div className="Brands__bottom">
                       <h4>{cars.dates[indx] + " " + cars.brand + " " + val}</h4>
-                      <p>Lokalizacja: {cars.localizations[indx]}</p>
+                      <p>Localization: {cars.localizations[indx]}</p>
                     </div>
                   </div>
                 </DisplayCars>
