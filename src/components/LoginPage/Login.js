@@ -35,19 +35,19 @@ export default class Login extends React.Component {
   handleLogin() {
     login(this.state.email, this.state.password).catch(() => {
       this.setState({
-        msg: "Błędny email lub hasło"
+        msg: "Wrong email or password"
       });
     });
   }
 
   render() {
-    document.title = "Samochodex - Logowanie";
+    document.title = "Carbook - Login";
     return (
       <div className="Login">
         <div className="form">
           <div className="form__left">
             <Fav />
-            <h2>Zaloguj się tutaj.</h2>
+            <h2>Log in here.</h2>
           </div>
           <div className="form__right">
             <div>
@@ -61,7 +61,7 @@ export default class Login extends React.Component {
               />
             </div>
             <div>
-              <label htmlFor="password">Hasło</label>
+              <label htmlFor="password">Password</label>
               <br />
               <Input
                 type="password"
@@ -72,7 +72,7 @@ export default class Login extends React.Component {
             </div>
             <button className="btn" onClick={() => this.handleLogin()}>
               <Key />
-              Zaloguj się
+              Login
             </button>
             <p>{this.state.msg}</p>
           </div>

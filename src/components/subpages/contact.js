@@ -43,17 +43,17 @@ export default class Contact extends React.Component {
     }
   };
   render() {
-    document.title = "Samochodex - Kontakt";
+    document.title = "CarBook - Contact";
     return (
       <div className="Contact">
         <div className="Contact__title">
           <div className="Contact__cont">
-            <h1 className="hover">K</h1>
+            <h1 className="hover">C</h1>
             <h1 className="hover">O</h1>
             <h1 className="hover">N</h1>
             <h1 className="hover">T</h1>
             <h1 className="hover">A</h1>
-            <h1 className="hover">K</h1>
+            <h1 className="hover">C</h1>
             <h1 className="hover">T</h1>
           </div>
         </div>
@@ -64,14 +64,14 @@ export default class Contact extends React.Component {
                 <tr>
                   <td>
                     <label htmlFor="imie">
-                      <b>Podaj imię</b>
+                      <b>First name</b>
                     </label>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefName}
                       type="text"
-                      placeholder="Imię"
+                      placeholder="First name"
                       value={this.state.name}
                     />
                   </td>
@@ -79,14 +79,14 @@ export default class Contact extends React.Component {
                 <tr>
                   <td>
                     <label htmlFor="nazwisko">
-                      <b>Podaj nazwisko</b>
+                      <b>Surname</b>
                     </label>
                   </td>
                   <td>
                     <Input
                       handleRef={this.handleRefSurname}
                       type="text"
-                      placeholder="Nazwisko"
+                      placeholder="Surname"
                       value={this.state.Surname}
                     />
                   </td>

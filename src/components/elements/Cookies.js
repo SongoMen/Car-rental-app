@@ -22,7 +22,7 @@ const CookiesNotification = () => {
     show && (
       <div className="Cookies">
         <CookieIcon />
-        <h4>Ta strona używa ciasteczek.</h4>
+        <h4>This site is using cookies.</h4>
         <button className="btn" onClick={() => save()}>
           Akceptuję
         </button>

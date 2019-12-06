@@ -1,4 +1,4 @@
-import React from "react";
+Loginimport React from "react";
 
 import Input from "../elements/Input";
 import { register } from "../../auth";
@@ -82,28 +82,28 @@ export default class Register extends React.Component {
         });
       } else {
         if (this._isMounted) {
-          this.setState({ msg: "Uzupełnij wszystkie pola." });
+          this.setState({ msg: "Please complete all inputs." });
         }
       }
     } else {
       if (this._isMounted) {
-        this.setState({ msg: "Podałeś zły email." });
+        this.setState({ msg: "You entered wrong email." });
       }
     }
   }
 
   render() {
-    document.title = "Samochodex - Rejestracja";
+    document.title = "CarBook - Register";
     return (
       <div className="Login">
         <div className="form">
           <div className="form__left">
             <Rocket />
-            <h2>Załóż konto</h2>
+            <h2>Create account.</h2>
           </div>
           <div className="form__right">
             <div>
-              <label htmlFor="first_name">Imię</label>
+              <label htmlFor="first_name">First Name</label>
               <br />
               <Input
                 type="text"
@@ -113,7 +113,7 @@ export default class Register extends React.Component {
               />
             </div>
             <div>
-              <label htmlFor="last_name">Nazwisko</label>
+              <label htmlFor="last_name">Surname</label>
               <br />
               <Input
                 type="text"
@@ -123,7 +123,7 @@ export default class Register extends React.Component {
               />
             </div>
             <div>
-              <label htmlFor="name">Nazwa użytkownika</label>
+              <label htmlFor="name">Account Name</label>
               <br />
               <Input
                 type="text"
@@ -143,7 +143,7 @@ export default class Register extends React.Component {
               />
             </div>
             <div>
-              <label htmlFor="password">Hasło</label>
+              <label htmlFor="password">Password</label>
               <br />
               <Input
                 type="password"
@@ -154,7 +154,7 @@ export default class Register extends React.Component {
             </div>
             <button className="btn" onClick={() => this.handleRegister()}>
               <Play />
-              Zarejestruj się
+              Register
             </button>
             <p>{this.state.msg}</p>
           </div>
