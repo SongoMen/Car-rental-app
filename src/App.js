@@ -86,7 +86,7 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Route exact path="/kontakt" component={Contact} />
+            <Route exact path="/contact" component={Contact} />
             <Route exact path="/admin" component={Admin} />
             <PublicRoute
               authed={this.state.authed}
@@ -98,8 +98,8 @@ class App extends React.Component {
               path="/register"
               component={Register}
             />
-            <Route path="/onas" component={About} />
-            <Route path="/samochody" component={Cars} />
+            <Route path="/about" component={About} />
+            <Route path="/cars" component={Cars} />
 
             <PrivateRoute
               authed={this.state.authed}

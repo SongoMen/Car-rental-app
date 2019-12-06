@@ -49,19 +49,19 @@ export default class Header extends React.Component {
             </li>
             <li>
               {" "}
-              <NavLink to="/onas" activeClassName="selected">
+              <NavLink to="/about" activeClassName="selected">
                 About us{" "}
               </NavLink>
             </li>
             <li>
               {" "}
-              <NavLink to="/samochody" activeClassName="selected">
+              <NavLink to="/cars" activeClassName="selected">
                 Cars{" "}
               </NavLink>
             </li>
             <li>
               {" "}
-              <NavLink to="/kontakt" activeClassName="selected">
+              <NavLink to="/contact" activeClassName="selected">
                 Contact{" "}
               </NavLink>
             </li>
