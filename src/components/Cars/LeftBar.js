@@ -6,7 +6,6 @@ import { checkIfLoggedIn, rentCar } from "../../auth";
 import DatePicker from "react-datepicker";
 import { Link, withRouter } from "react-router-dom";
 
-import { pl } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { ReactComponent as X } from "../../icons/x.svg";

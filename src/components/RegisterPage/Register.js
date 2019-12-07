@@ -1,4 +1,4 @@
-Loginimport React from "react";
+import React from "react";
 
 import Input from "../elements/Input";
 import { register } from "../../auth";

@@ -109,11 +109,11 @@ export default class EditCar extends React.Component {
     if (this._isMounted) {
       this.setState({
         selected: ref.target.value,
-        prcieInput: this.state.price[indx],
-        imageInput: this.state.image[indx],
-        modelInput: this.state.model[indx],
-        dateInput: this.state.date[indx],
-        localizationInput: this.state.localization[indx]
+        prcieInput: this.state.price[parseInt(indx)],
+        imageInput: this.state.image[parseInt(indx)],
+        modelInput: this.state.model[parseInt(indx)],
+        dateInput: this.state.date[parseInt(indx)],
+        localizationInput: this.state.localization[parseInt(indx)]
       });
     }
   }
@@ -152,7 +152,7 @@ export default class EditCar extends React.Component {
             {this.state.model.map((val, indx) => {
               return (
                 <option name={indx} key={indx}>
-                  {this.state.brand[indx] + " " + val}{" "}
+                  {this.state.brand[parseInt(indx)] + " " + val}{" "}
                 </option>
               );
             })}

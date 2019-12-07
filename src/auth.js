@@ -251,10 +251,10 @@ export function update(model, production_date, image, localization, price) {
     });
 }
 
-export function addUser(first_name, last_name, name, email, password, isAdmin) {
+export function addUser(firstName, lastName, name, email, password, isAdmin) {
   const params = new URLSearchParams();
-  params.append("first_name", first_name);
-  params.append("last_name", last_name);
+  params.append("first_name", firstName);
+  params.append("last_name", lastName);
   params.append("name", name);
   params.append("email", email);
   params.append("password", password);
@@ -271,10 +271,10 @@ export function addUser(first_name, last_name, name, email, password, isAdmin) {
     });
 }
 
-export function register(first_name, last_name, name, email, password) {
+export function register(firstName, lastName, name, email, password) {
   const params = new URLSearchParams();
-  params.append("first_name", first_name);
-  params.append("last_name", last_name);
+  params.append("first_name", firstName);
+  params.append("last_name", lastName);
   params.append("username", name);
   params.append("email", email);
   params.append("password", password);

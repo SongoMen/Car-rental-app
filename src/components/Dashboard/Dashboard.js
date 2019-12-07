@@ -52,13 +52,13 @@ export default class Dashboard extends React.Component {
         } = orders;
         if (res.brand.length !== brand.length) {
           for (let i = 0; i < res.brand.length; i++) {
-            brand.push(res.brand[i]);
-            model.push(res.model[i]);
-            end_date.push(res.end_date[i]);
-            start_date.push(res.start_date[i]);
-            image.push(res.image[i]);
-            localization.push(res.localization[i]);
-            price.push(res.price[i]);
+            brand.push(res.brand[parseInt(i)]);
+            model.push(res.model[parseInt(i)]);
+            end_date.push(res.end_date[parseInt(i)]);
+            start_date.push(res.start_date[parseInt(i)]);
+            image.push(res.image[parseInt(i)]);
+            localization.push(res.localization[parseInt(i)]);
+            price.push(res.price[parseInt(i)]);
           }
         }
       })

@@ -84,17 +84,17 @@ class Cars extends React.Component {
       .then(res => {
         for (let i = 0; i < res.model.length; i++) {
           this.setState({
-            model: [...this.state.model, res.model[i]],
-            image: [...this.state.image, res.image[i]],
-            localization: [...this.state.localization, res.localization[i]],
-            brand: [...this.state.brand, res.brand[i]],
-            name: [...this.state.name, res.brand[i] + " " + res.model[i]],
-            date: [...this.state.date, res.date[i]],
+            model: [...this.state.model, res.model[parseInt(i)]],
+            image: [...this.state.image, res.image[parseInt(i)]],
+            localization: [...this.state.localization, res.localization[parseInt(i)]],
+            brand: [...this.state.brand, res.brand[parseInt(i)]],
+            name: [...this.state.name, res.brand[parseInt(i)] + " " + res.model[parseInt(i)]],
+            date: [...this.state.date, res.date[parseInt(i)]],
             indexes: [...this.state.indexes, i],
-            price: [...this.state.price, Number(res.price[i])]
+            price: [...this.state.price, Number(res.price[parseInt(i)])]
           });
           holdIndex.push(i);
-          holdPrices.push(res.price[i]);
+          holdPrices.push(res.price[parseInt(i)]);
         }
       })
       .then(() => {
@@ -147,7 +147,7 @@ class Cars extends React.Component {
   }
   sortWithIndeces(toSort) {
     for (var i = 0; i < toSort.length; i++) {
-      toSort[i] = [toSort[i], i];
+      toSort[parseInt(i)] = [toSort[parseInt(i)], i];
     }
     toSort.sort(function(left, right) {
       return left[0] < right[0] ? -1 : 1;
@@ -170,7 +170,7 @@ class Cars extends React.Component {
 
   sortWithIndeces2(toSort) {
     for (var i = 0; i < toSort.length; i++) {
-      toSort[i] = [toSort[i], i];
+      toSort[parseInt(i)] = [toSort[parseInt(i)], i];
     }
     toSort.sort(function(left, right) {
       return left[0] > right[0] ? -1 : 1;
@@ -195,14 +195,14 @@ class Cars extends React.Component {
     let list = [];
     for (let i = 0; i < this.state.localization.length; i++) {
       if (
-        this.state.localization[i].toLowerCase().search(event.toLowerCase()) !==
+        this.state.localization[parseInt(i)].toLowerCase().search(event.toLowerCase()) !==
         -1
       ) {
         if (this.state.nameSearch === "") {
           list.push(i);
         } else {
           if (
-            this.state.name[i]
+            this.state.name[parseInt(i)]
               .toLowerCase()
               .search(this.state.nameSearch.toLowerCase()) !== -1
           ) {
@@ -217,12 +217,12 @@ class Cars extends React.Component {
   filterListName(event) {
     let list = [];
     for (let i = 0; i < this.state.name.length; i++) {
-      if (this.state.name[i].toLowerCase().search(event.toLowerCase()) !== -1) {
+      if (this.state.name[parseInt(i)].toLowerCase().search(event.toLowerCase()) !== -1) {
         if (this.state.localizationSearch === "") {
           list.push(i);
         } else {
           if (
-            this.state.localization[i]
+            this.state.localization[parseInt(i)]
               .toLowerCase()
               .search(this.state.localizationSearch.toLowerCase()) !== -1
           ) {
@@ -325,12 +325,12 @@ class Cars extends React.Component {
                 price
               } = this.state;
               /*if (
-                this.state.brand[indx] !== this.state.brand[indx - 1] &&
+                this.state.brand[parseInt(indx)] !== this.state.brand[indx - 1] &&
                 typeof this.state.brand[indx + 1] !== "undefined"
               ) {
                 return (
                   <div className="Cars__brandName">
-                    <h3>{this.state.brand[indx]}</h3>
+                    <h3>{this.state.brand[parseInt(indx)]}</h3>
                   </div>
                 );
               }*/

@@ -84,10 +84,10 @@ class CarBrands extends React.Component {
       .then(res => {
         cars.brand = brand;
         for (let i = 0; i < res.model.length; i++) {
-          cars.models.push(res.model[i]);
-          cars.images.push(res.image[i]);
-          cars.localizations.push(res.localization[i]);
-          cars.dates.push(res.date[i]);
+          cars.models.push(res.model[parseInt(i)]);
+          cars.images.push(res.image[parseInt(i)]);
+          cars.localizations.push(res.localization[parseInt(i)]);
+          cars.dates.push(res.date[parseInt(i)]);
         }
       })
       .then(() => {
@@ -107,8 +107,8 @@ class CarBrands extends React.Component {
       getBrands()
         .then(res => {
           for (let i = 0; i < res.names.length; i++) {
-            brands.names.push(res.names[i]);
-            brands.logo.push(res.logo[i]);
+            brands.names.push(res.names[parseInt(i)]);
+            brands.logo.push(res.logo[parseInt(i)]);
             brands.num = res.number;
           }
         })
@@ -173,7 +173,7 @@ class CarBrands extends React.Component {
                   }
                   key={indx}
                 >
-                  {parse(String(brands.logo[indx]))}
+                  {parse(String(brands.logo[parseInt(indx)]))}
                   {val}
                 </div>
               );
@@ -203,13 +203,13 @@ class CarBrands extends React.Component {
                           : { display: "none" }
                       }
                       onLoad={() => this.handleOnLoad()}
-                      src={cars.images[indx]}
+                      src={cars.images[parseInt(indx)]}
                       alt={val}
                     />
                     {!this.state.loadImage && <Loader />}
                     <div className="Brands__bottom">
-                      <h4>{cars.dates[indx] + " " + cars.brand + " " + val}</h4>
-                      <p>Localization: {cars.localizations[indx]}</p>
+                      <h4>{cars.dates[parseInt(indx)] + " " + cars.brand + " " + val}</h4>
+                      <p>Localization: {cars.localizations[parseInt(indx)]}</p>
                     </div>
                   </div>
                 </DisplayCars>

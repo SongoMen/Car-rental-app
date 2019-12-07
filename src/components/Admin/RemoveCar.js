@@ -23,7 +23,7 @@ export default class AddUser extends React.Component {
         for (let i = 0; i < res.brand.length; i++) {
           if (this._isMounted) {
             this.setState({
-              cars: [...this.state.cars, `${res.brand[i]} ${res.model[i]}`]
+              cars: [...this.state.cars, `${res.brand[parseInt(i)]} ${res.model[parseInt(i)]}`]
             });
           }
         }
