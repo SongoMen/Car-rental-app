@@ -34,12 +34,12 @@ export default class EditCar extends React.Component {
         for (let i = 0; i < res.brand.length; i++) {
           if (this._isMounted) {
             this.setState({
-              brand: [...this.state.brand, res.brand[i]],
-              date: [...this.state.date, res.date[i]],
-              image: [...this.state.image, res.image[i]],
-              localization: [...this.state.localization, res.localization[i]],
-              model: [...this.state.model, res.model[i]],
-              price: [...this.state.price, res.price[i]]
+              brand: [...this.state.brand, res.brand[parseInt(i)]],
+              date: [...this.state.date, res.date[parseInt(i)]],
+              image: [...this.state.image, res.image[parseInt(i)]],
+              localization: [...this.state.localization, res.localization[parseInt(i)]],
+              model: [...this.state.model, res.model[parseInt(i)]],
+              price: [...this.state.price, res.price[parseInt(i)]]
             });
           }
         }

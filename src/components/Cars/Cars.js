@@ -339,12 +339,12 @@ class Cars extends React.Component {
                   <div
                     onClick={() =>
                       this.leftBarChange(
-                        brand[val],
-                        model[val],
-                        image[val],
-                        date[val],
-                        localization[val],
-                        price[val]
+                        brand[parseInt(val)],
+                        model[parseInt(val)],
+                        image[parseInt(val)],
+                        date[parseInt(val)],
+                        localization[parseInt(val)],
+                        price[parseInt(val)]
                       )
                     }
                     key={val}
@@ -358,18 +358,18 @@ class Cars extends React.Component {
                           : { display: "none" }
                       }
                       onLoad={() => this.handleOnLoad()}
-                      src={image[val]}
+                      src={image[parseInt(val)]}
                       alt={val}
                     />
                     {!this.state.loadImage && <Loader />}
                     <div className="Cars__bottom">
                       <h4 className="Cars__desc">
-                        {date[val] + " " + brand[val] + " " + model[val]}
+                        {date[parseInt(val)] + " " + brand[parseInt(val)] + " " + model[parseInt(val)]}
                       </h4>
-                      <p>Lokalizacja: {localization[val]}</p>
+                      <p>Lokalizacja: {localization[parseInt(val)]}</p>
                       <div className="Cars__price">
                         <Tag />
-                        <h6>${price[val]}/24h</h6>
+                        <h6>${price[parseInt(val)]}/24h</h6>
                       </div>
                     </div>
                   </div>

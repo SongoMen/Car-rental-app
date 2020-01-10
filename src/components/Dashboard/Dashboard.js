@@ -108,22 +108,22 @@ export default class Dashboard extends React.Component {
                   return (
                     <div key={indx} className="Dashboard__order">
                       <div className="Dashboard__left">
-                        <img src={image[indx]} alt={val} />
+                        <img src={image[parseInt(indx)]} alt={val} />
                         <div className="Dashboard__desc">
-                          <h3>{val + " " + model[indx]}</h3>
+                          <h3>{val + " " + model[parseInt(indx)]}</h3>
                           <div className="Dashboard__dates">
                             <Calendar />
                             <h5>
-                              {start_date[indx]} - {end_date[indx]}
+                              {start_date[parseInt(indx)]} - {end_date[parseInt(indx)]}
                             </h5>
                           </div>
                           <div className="Dashboard__place">
                             <Map />
-                            <h5>{localization[indx]}</h5>
+                            <h5>{localization[parseInt(indx)]}</h5>
                           </div>
                         </div>
                       </div>
-                      <h4 className="price">${price[indx]}</h4>
+                      <h4 className="price">${price[parseInt(indx)]}</h4>
                     </div>
                   );
                 })}
