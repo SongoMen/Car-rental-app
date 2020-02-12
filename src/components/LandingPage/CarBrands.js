@@ -179,7 +179,7 @@ class CarBrands extends React.Component {
               );
             })}
           {!this.state.loader && (
-            <Link to="/samochody">
+            <Link to="/cars">
               <div className="Brands__option">
                 <span className="color">{brands.num - 5}+ </span>
               </div>
