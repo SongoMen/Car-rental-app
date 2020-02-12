@@ -1,15 +1,15 @@
 import React from "react";
-import { getBrands, getCars } from "../../auth";
+import {getBrands, getCars} from "../../auth";
 import Loader from "../elements/Loader";
 import parse from "html-react-parser";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import DisplayCars from "./DisplayCars";
-import { withRouter } from "react-router";
+import {withRouter} from "react-router";
 
 let brands = {
   names: [],
   logo: [],
-  num: ""
+  num: "",
 };
 
 let cars = {
@@ -17,7 +17,7 @@ let cars = {
   images: [],
   dates: [],
   localizations: [],
-  brand: ""
+  brand: "",
 };
 
 class CarBrands extends React.Component {
@@ -31,7 +31,7 @@ class CarBrands extends React.Component {
       loader: true,
       carLoader: true,
       canSelect: true,
-      loadImage: false
+      loadImage: false,
     };
     this.handleChangeBrand = this.handleChangeBrand.bind(this);
     this.handleOnLoad = this.handleOnLoad.bind(this);
@@ -46,12 +46,12 @@ class CarBrands extends React.Component {
     ) {
       if (this._isMounted) {
         this.setState({
-          loadImage: false
+          loadImage: false,
         });
       }
       this.fetchCars(el.target.getAttribute("name"));
       var elemsActive = document.querySelectorAll(
-        "." + el.target.classList.value.replace(" ", ".")
+        "." + el.target.classList.value.replace(" ", "."),
       );
       var elems = document.querySelectorAll(".Brands__option");
       [].forEach.call(elems, function(el) {
@@ -66,7 +66,7 @@ class CarBrands extends React.Component {
   handleSearchCar(value) {
     this.props.history.push({
       pathname: "/cars",
-      search: `?name=${value}`
+      search: `?name=${value}`,
     });
   }
 
@@ -77,7 +77,7 @@ class CarBrands extends React.Component {
     cars.localizations = [];
     if (this._isMounted) {
       this.setState({
-        carLoader: true
+        carLoader: true,
       });
     }
     getCars(brand)
@@ -95,7 +95,7 @@ class CarBrands extends React.Component {
           if (this._isMounted) {
             this.setState({
               carLoader: false,
-              canSelect: true
+              canSelect: true,
             });
           }
         }, 500);
@@ -115,7 +115,7 @@ class CarBrands extends React.Component {
         .then(() => {
           if (this._isMounted) {
             this.setState({
-              loader: false
+              loader: false,
             });
           }
         })
@@ -125,7 +125,7 @@ class CarBrands extends React.Component {
     } else {
       if (this._isMounted) {
         this.setState({
-          loader: false
+          loader: false,
         });
       }
     }
@@ -134,7 +134,7 @@ class CarBrands extends React.Component {
   handleOnLoad() {
     setTimeout(() => {
       if (this._isMounted) {
-        this.setState({ loadImage: true });
+        this.setState({loadImage: true});
       }
     }, 500);
   }
@@ -171,8 +171,7 @@ class CarBrands extends React.Component {
                     " " +
                     (indx === 0 ? "active" : "")
                   }
-                  key={indx}
-                >
+                  key={indx}>
                   {parse(String(brands.logo[parseInt(indx)]))}
                   {val}
                 </div>
@@ -194,13 +193,12 @@ class CarBrands extends React.Component {
                   <div
                     onClick={() => this.handleSearchCar(cars.brand + " " + val)}
                     key={indx}
-                    className="Brands__car"
-                  >
+                    className="Brands__car">
                     <img
                       style={
                         this.state.loadImage
-                          ? { display: "flex" }
-                          : { display: "none" }
+                          ? {display: "flex"}
+                          : {display: "none"}
                       }
                       onLoad={() => this.handleOnLoad()}
                       src={cars.images[parseInt(indx)]}
@@ -208,7 +206,13 @@ class CarBrands extends React.Component {
                     />
                     {!this.state.loadImage && <Loader />}
                     <div className="Brands__bottom">
-                      <h4>{cars.dates[parseInt(indx)] + " " + cars.brand + " " + val}</h4>
+                      <h4>
+                        {cars.dates[parseInt(indx)] +
+                          " " +
+                          cars.brand +
+                          " " +
+                          val}
+                      </h4>
                       <p>Localization: {cars.localizations[parseInt(indx)]}</p>
                     </div>
                   </div>
