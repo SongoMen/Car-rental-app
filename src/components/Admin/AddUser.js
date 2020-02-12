@@ -203,7 +203,7 @@ export default class AddUser extends React.Component {
                       className="btn"
                       onClick={this.handleClick}
                       type="submit"
-                      value="Dodaj"
+                      value="Add"
                     />
                   </td>
                 </tr>

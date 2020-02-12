@@ -55,23 +55,23 @@ export default class Admin extends React.Component {
           <div>
             <h1>Admin Panel</h1>
             <div className="Admin__buttons">
-              <div className="btn" name="dodajsam" onClick={this.changeSection}>
+              <div className="btn" name="addCar" onClick={this.changeSection}>
                 Add car
               </div>
-              <div className="btn" name="dodajuz" onClick={this.changeSection}>
+              <div className="btn" name="addUser" onClick={this.changeSection}>
                 Add user
               </div>
-              <div className="btn" name="edytuj" onClick={this.changeSection}>
-                Add car
+              <div className="btn" name="edit" onClick={this.changeSection}>
+                Edit car
               </div>
-              <div className="btn" name="usun" onClick={this.changeSection}>
+              <div className="btn" name="remove" onClick={this.changeSection}>
                 Remove car
               </div>
             </div>
-            {this.state.section === "dodajsam" && <Add />}
-            {this.state.section === "dodajuz" && <AddUser />}
-            {this.state.section === "usun" && <RemoveCar />}
-            {this.state.section === "edytuj" && <EditCar />}
+            {this.state.section === "addCar" && <Add />}
+            {this.state.section === "addUser" && <AddUser />}
+            {this.state.section === "remove" && <RemoveCar />}
+            {this.state.section === "edit" && <EditCar />}
           </div>
         )}
         {!status && !this.state.loading && <h1>Error</h1>}

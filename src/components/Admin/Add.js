@@ -138,7 +138,7 @@ export default class Add extends React.Component {
   render() {
     return (
       <div className="Add">
-        <h1>Dodaj samochód</h1>
+        <h1>Add car</h1>
         {this.state.loading && <Loader />}
         {!this.state.loading && (
           <form>
@@ -231,7 +231,7 @@ export default class Add extends React.Component {
                       className="btn"
                       onClick={this.addCarFunc}
                       type="submit"
-                      value="Dodaj"
+                      value="Add"
                     />
                   </td>
                 </tr>

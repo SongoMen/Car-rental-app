@@ -65,7 +65,7 @@ class CarBrands extends React.Component {
 
   handleSearchCar(value) {
     this.props.history.push({
-      pathname: "/samochody",
+      pathname: "/cars",
       search: `?name=${value}`
     });
   }

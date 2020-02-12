@@ -61,7 +61,7 @@ class Banner extends React.Component {
   searchCars() {
     const value = document.querySelector(".typeahead input").value;
     this.props.history.push({
-      pathname: "/samochody",
+      pathname: "/cars",
       search: `?localization=${value}`
     });
   }
