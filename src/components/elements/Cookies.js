@@ -10,7 +10,7 @@ const CookiesNotification = () => {
   function save() {
     cookies.set("cookies", true, {
       path: "/",
-      expires: new Date(Date.now() + 1000000000),
+      expires: new Date(Date.now() + 1000000),
     });
     render = false;
     setShow(false);
