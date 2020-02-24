@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import {ReactComponent as CookieIcon} from "../../icons/cookie.svg";
 
 const CookiesNotification = () => {
+  // eslint-disable-next-line
   let render = true;
   const cookies = new Cookies();
   const [show, setShow] = useState(true);
