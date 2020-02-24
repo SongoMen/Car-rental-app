@@ -47,7 +47,7 @@ export default class Login extends React.Component {
         <div className="form">
           <div className="form__left">
             <Fav />
-            <h2>Log in here.</h2>
+            <h2>Login here.</h2>
           </div>
           <div className="form__right">
             <div>

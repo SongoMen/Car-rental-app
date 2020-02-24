@@ -16,6 +16,10 @@
     display: flex
     height: 75%
     border-radius: 5px
+    @media only screen and (max-width: 1000px)
+      width: 85%
+    @media only screen and (max-width: 800px)
+      width: 90%
     &__left
       width: 50%
       display: flex
@@ -27,6 +31,8 @@
       flex-direction: column
       color: white
       text-align: center
+      @media only screen and (max-width: 600px)
+        display: none
       h2
         margin-bottom: 50px
       svg
@@ -42,6 +48,8 @@
       flex-direction: column
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
+      @media only screen and (max-width: 600px)
+        width: 100%
       div
         width: 60%
         margin: 20px 0

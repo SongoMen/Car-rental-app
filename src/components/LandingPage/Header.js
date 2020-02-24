@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import Cookies from "universal-cookie";
 import Logo from "../elements/Logo";
-import { checkIfLoggedIn, logout, isAdmin } from "../../auth";
+import {checkIfLoggedIn, logout, isAdmin} from "../../auth";
 
 export default class Header extends React.Component {
   _isMounted = false;
@@ -12,7 +12,7 @@ export default class Header extends React.Component {
     this.state = {
       logged: null,
       position: "static",
-      isAdmin: false
+      isAdmin: false,
     };
   }
   componentDidMount() {
@@ -20,11 +20,11 @@ export default class Header extends React.Component {
     isAdmin().then(res => {
       if (this._isMounted) {
         this.setState({
-          isAdmin: res.isAdmin === "1" ? true : false
+          isAdmin: res.isAdmin === "1" ? true : false,
         });
       }
     });
-    if (this._isMounted) this.setState({ logged: checkIfLoggedIn() });
+    if (this._isMounted) this.setState({logged: checkIfLoggedIn()});
   }
   componentWillUnmount() {
     this._isMounted = false;
@@ -37,14 +37,13 @@ export default class Header extends React.Component {
         <div
           className="Header"
           id="header"
-          style={{ position: this.state.position }}
-        >
+          style={{position: this.state.position}}>
           <Logo />
           <ul>
             <li>
               {" "}
               <NavLink exact to="/" activeClassName="selected">
-                Main page{" "}
+                Home{" "}
               </NavLink>
             </li>
             <li>

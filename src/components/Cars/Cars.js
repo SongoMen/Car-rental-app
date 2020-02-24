@@ -282,7 +282,7 @@ class Cars extends React.Component {
     document.title = "Samochodex - Katalog";
     return (
       <div className="Cars">
-        <h3>Filtry</h3>
+        <h3>Filters</h3>
         <div className="Cars__filters">
           <div>
             <label htmlFor="brand">Car name:</label>
