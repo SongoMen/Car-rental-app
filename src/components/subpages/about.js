@@ -1,7 +1,7 @@
 import React from "react";
 
 const About = () => {
-  document.title = "Samochodex - O nas";
+  document.title = "CarBook - O nas";
   return (
     <div className="About">
       <div className="About__title">

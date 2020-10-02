@@ -83,11 +83,13 @@ class CarBrands extends React.Component {
     getCars(brand)
       .then(res => {
         cars.brand = brand;
-        for (let i = 0; i < res.model.length; i++) {
-          cars.models.push(res.model[parseInt(i)]);
-          cars.images.push(res.image[parseInt(i)]);
-          cars.localizations.push(res.localization[parseInt(i)]);
-          cars.dates.push(res.date[parseInt(i)]);
+        if(res.model) {
+          for (let i = 0; i < res.model.length; i++) {
+            cars.models.push(res.model[parseInt(i)]);
+            cars.images.push(res.image[parseInt(i)]);
+            cars.localizations.push(res.localization[parseInt(i)]);
+            cars.dates.push(res.date[parseInt(i)]);
+          }
         }
       })
       .then(() => {

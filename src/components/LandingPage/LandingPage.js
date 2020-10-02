@@ -7,7 +7,7 @@ import CarBrands from "./CarBrands";
 
 export default class LandingPage extends React.Component {
   render() {
-    document.title = "Samochodex";
+    document.title = "CarBook";
     return (
       <div className="LandingPage">
         <Banner />

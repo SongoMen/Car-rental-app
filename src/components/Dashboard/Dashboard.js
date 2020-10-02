@@ -88,7 +88,7 @@ export default class Dashboard extends React.Component {
       localization,
       price
     } = orders;
-    document.title = "Samochodex - Panel";
+    document.title = "CarBook - Panel";
     return (
       <div className="Dashboard">
         {this.state.loading ? (
