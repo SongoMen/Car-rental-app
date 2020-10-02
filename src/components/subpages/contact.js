@@ -94,7 +94,7 @@ export default class Contact extends React.Component {
                 <tr>
                   <td>
                     <label>
-                      <b>Podaj email</b>
+                      <b>Email</b>
                     </label>
                   </td>
                   <td>
@@ -108,7 +108,7 @@ export default class Contact extends React.Component {
                 </tr>
                 <tr>
                   <td>
-                    <b>Wiadomość</b>
+                    <b>Message</b>
                   </td>
                   <td>
                     <textarea className="input" placeholder="Wiadomosc" />

@@ -146,7 +146,7 @@ export default class Add extends React.Component {
               <tbody>
                 <tr>
                   <td>
-                    <b>Marka</b>
+                    <b>Brand</b>
                   </td>
                   <td>
                     <select
@@ -174,7 +174,7 @@ export default class Add extends React.Component {
                 </tr>
                 <tr>
                   <td>
-                    <b>Rok produkcji</b>
+                    <b>Year of production</b>
                   </td>
                   <td>
                     <Input
@@ -187,7 +187,7 @@ export default class Add extends React.Component {
                 </tr>
                 <tr>
                   <td>
-                    <b>Zdjęcie</b>
+                    <b>Photo</b>
                   </td>
                   <td>
                     <Input
@@ -200,7 +200,7 @@ export default class Add extends React.Component {
                 </tr>
                 <tr>
                   <td>
-                    <b>Lokalizacja</b>
+                    <b>Localization</b>
                   </td>
                   <td>
                     <Input
@@ -213,7 +213,7 @@ export default class Add extends React.Component {
                 </tr>
                 <tr>
                   <td>
-                    <b>Cena</b>
+                    <b>Price</b>
                   </td>
                   <td>
                     <Input

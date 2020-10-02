@@ -15,14 +15,14 @@ const About = () => {
       </div>
       <div className="About__content">
         <h3>
-          Posiadamy ogromne doświadczenie w motoryzacji. Zajmujemy się importem
-          samochodów z zagranicy. Posiadamy szeroki wybór samochodów. Zarówno
-          przystępnych cenowo, jak i marki bardziej luksuwowe z bogato
-          wyposażonym wnętrzem. Każdy znajdzie u nas coś dla siebie. Wszystkie
-          posiadane przez nas samochody są w doskonałym stanie i każdy posiada
-          ważny przegląd techniczny oraz wszelką niezbędną dokumentację.
-          Zapraszamy do zapoznania się z szerokim wachlarzem samochodów
-          dostępnym na naszej stronie internetowej.
+          We have extensive experience in the automotive industry. We deal with import
+          cars from abroad. We have a wide selection of cars. Both
+          affordable and more luxurious with lavish brands
+          equipped interior. Everyone will find something for themselves. All of them
+          Our cars are in perfect condition and everyone has
+          important technical inspection and all necessary documentation.
+          We invite you to familiarize yourself with a wide range of cars
+          available on our website.
         </h3>
       </div>
     </div>
