@@ -279,7 +279,7 @@ class Cars extends React.Component {
   }
 
   render() {
-    document.title = "Samochodex - Katalog";
+    document.title = "CarBook - Katalog";
     return (
       <div className="Cars">
         <h3>Filters</h3>

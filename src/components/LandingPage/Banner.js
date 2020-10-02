@@ -34,11 +34,13 @@ class Banner extends React.Component {
 
   fetchLocalizations() {
     getLocalizations().then(res => {
-      for (let i = 0; i < res.localizations.length; i++) {
-        if (this._isMounted) {
-          this.setState({
-            cities: [...this.state.cities, res.localizations[parseInt(i)]]
-          });
+      if(res.localizations) {
+        for (let i = 0; i < res.localizations.length; i++) {
+          if (this._isMounted) {
+            this.setState({
+              cities: [...this.state.cities, res.localizations[parseInt(i)]]
+            });
+          }
         }
       }
     });
